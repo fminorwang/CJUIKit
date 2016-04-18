@@ -20,4 +20,9 @@ typedef NS_OPTIONS(NSUInteger, CJUpdatorStyle) {
 
 - (void)setTableUpdatorStyle:(CJUpdatorStyle)style;
 
+- (void)setRefreshBlock:(void (^)(void))block;
+- (void)setLoadMoreBlock:(void (^)(void))block;
+
+- (void)finishUpdate;
+
 @end

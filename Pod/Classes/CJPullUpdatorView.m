@@ -10,13 +10,7 @@
 
 @implementation CJPullUpdatorView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+@synthesize updateAction = _updateAction;
 
 - (instancetype)init
 {
@@ -49,7 +43,7 @@
 
 - (void)reverseImage
 {
-    _pullState = CJPullUpdatorViewStateReady;
+    _pullState = CJPullUpdatorViewStateReadyToRefresh;
     [UIView animateWithDuration:0.35f animations:^{
         [_pullImageView setTransform:CGAffineTransformMakeRotation(M_PI)];
     }];
@@ -61,6 +55,14 @@
     [UIView animateWithDuration:0.35f animations:^{
         [_pullImageView setTransform:CGAffineTransformIdentity];
     }];
+}
+
+- (void)beginAnimation
+{
+}
+
+- (void)stopAnimation
+{
 }
 
 @end

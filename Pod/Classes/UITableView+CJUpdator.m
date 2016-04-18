@@ -47,8 +47,37 @@
     
     if ( style != CJUpdatorStyleNone ) {
         [self addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+        [self setDelegate:self];
     } else {
     }
+}
+
+- (void)setRefreshBlock:(void (^)(void))block
+{
+    if ( block == nil ) {
+        return;
+    }
+    
+    CJPullUpdatorView *_pullUpdatorView = [self _getPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleRefresh];
+    if ( _pullUpdatorView == nil ) {
+        return;
+    }
+    
+    [_pullUpdatorView setUpdateAction:block];
+}
+
+- (void)setLoadMoreBlock:(void (^)(void))block
+{
+    if ( block == nil ) {
+        return;
+    }
+    
+    CJPullUpdatorView *_pullUpdatorView = [self _getPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleLoadmore];
+    if ( _pullUpdatorView == nil ) {
+        return;
+    }
+    
+    [_pullUpdatorView setUpdateAction:block];
 }
 
 #pragma mark - pull container init & dealloc
@@ -138,13 +167,17 @@
         return;
     }
     
+    NSLog(@"Offset: %f, Inset: %f", self.contentOffset.y, self.contentInset.top);
+    
     CJPullUpdatorView *_refreshView = [self _refreshContainer];
-    if ( self.contentOffset.y <= - DEFAULT_UPDATOR_HEIGHT && _refreshView.pullState == CJPullUpdatorViewStateNormal ) {
+    if (( self.contentOffset.y <= - DEFAULT_UPDATOR_HEIGHT - self.contentInset.top )
+        && ( _refreshView.pullState == CJPullUpdatorViewStateNormal )) {
         CJPullUpdatorView *_pullUpdatorView = [self _refreshContainer];
         [_pullUpdatorView reverseImage];
     }
     
-    if ( self.contentOffset.y > - DEFAULT_UPDATOR_HEIGHT && _refreshView.pullState == CJPullUpdatorViewStateReady ) {
+    if (( self.contentOffset.y > - DEFAULT_UPDATOR_HEIGHT - self.contentInset.top )
+        && _refreshView.pullState == CJPullUpdatorViewStateReadyToRefresh ) {
         CJPullUpdatorView *_pullUpdatorView = [self _refreshContainer];
         [_pullUpdatorView resetImage];
     }

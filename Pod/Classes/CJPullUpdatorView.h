@@ -10,7 +10,7 @@
 
 typedef NS_ENUM(NSInteger, CJPullUpdatorViewState) {
     CJPullUpdatorViewStateNormal,
-    CJPullUpdatorViewStateReady,
+    CJPullUpdatorViewStateReadyToRefresh,
     CJPullUpdatorViewStateAnimating
 };
 
@@ -18,9 +18,12 @@ typedef NS_ENUM(NSInteger, CJPullUpdatorViewState) {
 {
     UIImageView                     *_pullImageView;
     UILabel                         *_descriptionLabel;
+    
+    void (^_updateAction)(void);
 }
 
-@property (nonatomic, readonly) CJPullUpdatorViewState              pullState;
+@property (nonatomic, readonly)     CJPullUpdatorViewState              pullState;
+@property (nonatomic, strong)       void (^updateAction)();
 
 - (void)reverseImage;
 - (void)resetImage;
