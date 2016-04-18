@@ -22,7 +22,7 @@ pod "CJUIKit"
 
 ## Author
 
-fminor, wangshengli@qingtingfm.com
+fminor, fminor.wang@gmail.com
 
 ## License
 
