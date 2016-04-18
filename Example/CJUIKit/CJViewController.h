@@ -8,6 +8,12 @@
 
 @import UIKit;
 
-@interface CJViewController : UIViewController
+#import <CJUIKit/UIColor+CJUIKit.h>
+#import <CJUIKit/UITableView+CJUpdator.h>
+
+@interface CJViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+{
+    UITableView                     *_tableView;
+}
 
 @end

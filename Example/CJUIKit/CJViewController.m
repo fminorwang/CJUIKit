@@ -8,6 +8,8 @@
 
 #import "CJViewController.h"
 
+#import "CJUIKit-Prefix.pch"
+
 @interface CJViewController ()
 
 @end
@@ -17,7 +19,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    _tableView = [[UITableView alloc] init];
+    [_tableView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    [_tableView setBackgroundColor:[UIColor whiteColor]];
+    [_tableView setTableUpdatorStyle:CJUpdatorStyleRefreshAndLoadmore];
+    [self.view addSubview:_tableView];
 }
 
 - (void)didReceiveMemoryWarning

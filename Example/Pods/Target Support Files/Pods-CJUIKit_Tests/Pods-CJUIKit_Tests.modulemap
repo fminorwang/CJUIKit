@@ -1,0 +1,6 @@
+framework module Pods_CJUIKit_Tests {
+  umbrella header "Pods-CJUIKit_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
