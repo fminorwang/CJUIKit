@@ -11,8 +11,13 @@
 #define REFRESH_CONTAINER_TAG                       1225
 #define LOADMORE_CONTAINER_TAG                      9227
 
+#define SCROLL_DURATION                             0.3f
+
 #import "UITableView+CJUpdator.h"
 #import "CJPullUpdatorView.h"
+#import "CJTouchEndGestureRecognizer.h"
+#import <objc/runtime.h>
+#import <objc/message.h>
 
 @implementation UITableView (CJUpdator)
 
@@ -46,10 +51,33 @@
     }
     
     if ( style != CJUpdatorStyleNone ) {
+        CJTouchEndGestureRecognizer *_endGesture = [[CJTouchEndGestureRecognizer alloc]
+                                                    initWithTarget:self action:@selector(_actionTouchesEnded:)];
+        
+        __strong UITableView *_sss = self;
+        SEL _selector = @selector(setDelegate:);
+        NSMethodSignature *_methodSig = [[CJTouchEndGestureRecognizer class] instanceMethodSignatureForSelector:_selector];
+        NSInvocation *_invocation = [NSInvocation invocationWithMethodSignature:_methodSig];
+        [_invocation setTarget:_endGesture];
+        [_invocation setSelector:_selector];
+        [_invocation setArgument:&_sss atIndex:2];
+        [_invocation retainArguments];
+        [_invocation invoke];
+        
+        [self addGestureRecognizer:_endGesture];
         [self addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
-        [self setDelegate:self];
     } else {
     }
+}
+
+- (BOOL)isRefreshStyle
+{
+    return ( [self _getPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleRefresh] != nil );
+}
+
+- (BOOL)isLoadmoreStyle
+{
+    return ( [self _getPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleLoadmore] != nil );
 }
 
 - (void)setRefreshBlock:(void (^)(void))block
@@ -78,6 +106,22 @@
     }
     
     [_pullUpdatorView setUpdateAction:block];
+}
+
+- (void)finishUpdate
+{
+    if ( [self isRefreshStyle] ) {
+        CJPullUpdatorView *_refreshView = [self _getPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleRefresh];
+        [_refreshView stopAnimation];
+        
+        UIEdgeInsets _insets = self.contentInset;
+        _insets.top -= _refreshView.bounds.size.height;
+        [UIView animateWithDuration:SCROLL_DURATION delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self setContentInset:_insets];
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
 }
 
 #pragma mark - pull container init & dealloc
@@ -167,8 +211,6 @@
         return;
     }
     
-    NSLog(@"Offset: %f, Inset: %f", self.contentOffset.y, self.contentInset.top);
-    
     CJPullUpdatorView *_refreshView = [self _refreshContainer];
     if (( self.contentOffset.y <= - DEFAULT_UPDATOR_HEIGHT - self.contentInset.top )
         && ( _refreshView.pullState == CJPullUpdatorViewStateNormal )) {
@@ -181,6 +223,35 @@
         CJPullUpdatorView *_pullUpdatorView = [self _refreshContainer];
         [_pullUpdatorView resetImage];
     }
+}
+
+#pragma mark - touches ended
+
+- (void)_actionTouchesEnded:(UIGestureRecognizer *)gesture
+{
+    if ( [self isRefreshStyle] ) {
+        CJPullUpdatorView *_refreshView = [self _refreshContainer];
+        UIEdgeInsets _insets = self.contentInset;
+        _insets.top += _refreshView.bounds.size.height;
+        [UIView animateWithDuration:SCROLL_DURATION delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self setContentInset:_insets];
+        } completion:^(BOOL finished) {
+            [_refreshView beginAnimation];
+        }];
+        
+        if ( _refreshView.updateAction ) {
+            _refreshView.updateAction();
+        }
+    }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    if ( [gestureRecognizer isKindOfClass:[CJTouchEndGestureRecognizer class]] ) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 @end

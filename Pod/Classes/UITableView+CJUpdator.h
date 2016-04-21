@@ -18,10 +18,18 @@ typedef NS_OPTIONS(NSUInteger, CJUpdatorStyle) {
 
 @interface UITableView (CJUpdator)
 
+// table updator style properties
+
 - (void)setTableUpdatorStyle:(CJUpdatorStyle)style;
+- (BOOL)isRefreshStyle;
+- (BOOL)isLoadmoreStyle;
+
+// update action settings
 
 - (void)setRefreshBlock:(void (^)(void))block;
 - (void)setLoadMoreBlock:(void (^)(void))block;
+
+// stop update animation & reset tableView to normal state
 
 - (void)finishUpdate;
 

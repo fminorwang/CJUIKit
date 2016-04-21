@@ -8,6 +8,9 @@
 
 #import "CJPullUpdatorView.h"
 
+#define UPDATE_ICON_NAME                        @"pull-update-icon"
+#define UPDATING_ICON_NAME                      @"pull-updating-icon"
+
 @implementation CJPullUpdatorView
 
 @synthesize updateAction = _updateAction;
@@ -19,7 +22,7 @@
         NSBundle *_podBundle = [NSBundle bundleForClass:[self class]];
         NSURL *_bundleUrl = [_podBundle URLForResource:@"CJUIKit" withExtension:@"bundle"];
         NSBundle *_cjBundle = [NSBundle bundleWithURL:_bundleUrl];
-        UIImage *_image = [UIImage imageNamed:[_cjBundle pathForResource:@"pull-update-icon" ofType:@"png"]];
+        UIImage *_image = [UIImage imageNamed:[_cjBundle pathForResource:UPDATE_ICON_NAME ofType:@"png"]];
         
         _pullImageView = [[UIImageView alloc] init];
         [_pullImageView setImage:_image];
@@ -59,10 +62,24 @@
 
 - (void)beginAnimation
 {
+    NSBundle *_podBundle = [NSBundle bundleForClass:[self class]];
+    NSURL *_bundleUrl = [_podBundle URLForResource:@"CJUIKit" withExtension:@"bundle"];
+    NSBundle *_cjBundle = [NSBundle bundleWithURL:_bundleUrl];
+    UIImage *_image = [UIImage imageNamed:[_cjBundle pathForResource:UPDATING_ICON_NAME ofType:@"png"]];
+    [_pullImageView setImage:_image];
+    
+    CABasicAnimation *_rotateAnimate = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    [_rotateAnimate setFromValue:@0];
+    [_rotateAnimate setToValue:@(M_PI * 2)];
+    [_rotateAnimate setRepeatCount:INT16_MAX];
+    [_rotateAnimate setDuration:1.f];
+    
+    [_pullImageView.layer addAnimation:_rotateAnimate forKey:@"rotate"];
 }
 
 - (void)stopAnimation
 {
+    [_pullImageView.layer removeAnimationForKey:@"rotate"];
 }
 
 @end
