@@ -29,9 +29,14 @@
     [self.view addSubview:_tableView];
     
     [_tableView setTableUpdatorStyle:CJUpdatorStyleRefreshAndLoadmore];
+    __weak CJViewController *_wss = self;
     [_tableView setRefreshBlock:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [_tableView finishUpdate];
+            if ( _wss == nil ) {
+                return;
+            }
+            __strong CJViewController *_sss = _wss;
+            [_sss->_tableView finishUpdate];
         });
     }];
 }
