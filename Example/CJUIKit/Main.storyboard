@@ -28,6 +28,7 @@
         <scene sceneID="LNB-tH-URP">
             <objects>
                 <navigationController id="Ccy-tn-C4J" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gcS-qw-yXZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

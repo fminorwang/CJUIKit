@@ -19,11 +19,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.navigationController.navigationBar setTranslucent:YES];
     
     _tableView = [[UITableView alloc] init];
     [_tableView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     [_tableView setBackgroundColor:[UIColor whiteColor]];
-    [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+    [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
@@ -39,6 +40,22 @@
             [_sss->_tableView finishUpdate];
         });
     }];
+    
+    [_tableView setLoadMoreBlock:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if ( _wss == nil ) {
+                return;
+            }
+            __strong CJViewController *_sss = _wss;
+            [_sss->_tableView finishUpdate];
+        });
+    }];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setTranslucent:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,7 +74,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return 8;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -75,6 +92,18 @@
     UITableViewCell *_cell = [tableView dequeueReusableCellWithIdentifier:@"demo_cell"];
     if ( _cell == nil ) {
         _cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"demo_cell"];
+        
+        UIView *_sepLine = [[UIView alloc] init];
+        [_sepLine setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [_sepLine setBackgroundColor:[UIColor blackColor]];
+        [_cell.contentView addSubview:_sepLine];
+        NSDictionary *_views = NSDictionaryOfVariableBindings(_sepLine);
+        [_cell.contentView addConstraints:[NSLayoutConstraint
+                                           constraintsWithVisualFormat:@"H:|[_sepLine]|"
+                                           options:0 metrics:nil views:_views]];
+        [_cell.contentView addConstraints:[NSLayoutConstraint
+                                           constraintsWithVisualFormat:@"V:[_sepLine(0.5)]|"
+                                           options:0 metrics:nil views:_views]];
     }
     return _cell;
 }
@@ -83,6 +112,7 @@
 {
     [cell.textLabel setText:[NSString stringWithFormat:@"%ld-%ld",
                              (long)indexPath.section + 1, (long)indexPath.row + 1]];
+    [cell.textLabel setBackgroundColor:[UIColor clearColor]];
 }
 
 @end
