@@ -62,6 +62,8 @@
 
 - (void)beginAnimation
 {
+    _pullState = CJPullUpdatorViewStateAnimating;
+    
     NSBundle *_podBundle = [NSBundle bundleForClass:[self class]];
     NSURL *_bundleUrl = [_podBundle URLForResource:@"CJUIKit" withExtension:@"bundle"];
     NSBundle *_cjBundle = [NSBundle bundleWithURL:_bundleUrl];
@@ -79,7 +81,15 @@
 
 - (void)stopAnimation
 {
+    _pullState = CJPullUpdatorViewStateNormal;
+    
     [_pullImageView.layer removeAnimationForKey:@"rotate"];
+    
+    NSBundle *_podBundle = [NSBundle bundleForClass:[self class]];
+    NSURL *_bundleUrl = [_podBundle URLForResource:@"CJUIKit" withExtension:@"bundle"];
+    NSBundle *_cjBundle = [NSBundle bundleWithURL:_bundleUrl];
+    UIImage *_image = [UIImage imageNamed:[_cjBundle pathForResource:UPDATE_ICON_NAME ofType:@"png"]];
+    [_pullImageView setImage:_image];
 }
 
 @end

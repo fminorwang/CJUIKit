@@ -231,16 +231,19 @@
 {
     if ( [self isRefreshStyle] ) {
         CJPullUpdatorView *_refreshView = [self _refreshContainer];
-        UIEdgeInsets _insets = self.contentInset;
-        _insets.top += _refreshView.bounds.size.height;
-        [UIView animateWithDuration:SCROLL_DURATION delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            [self setContentInset:_insets];
-        } completion:^(BOOL finished) {
+            if ( _refreshView.pullState == CJPullUpdatorViewStateReadyToRefresh ) {
+            UIEdgeInsets _insets = self.contentInset;
+            _insets.top += _refreshView.bounds.size.height;
+            [UIView animateWithDuration:SCROLL_DURATION delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                [self setContentInset:_insets];
+            } completion:^(BOOL finished) {
+            }];
+            
             [_refreshView beginAnimation];
-        }];
-        
-        if ( _refreshView.updateAction ) {
-            _refreshView.updateAction();
+            
+            if ( _refreshView.updateAction ) {
+                _refreshView.updateAction();
+            }
         }
     }
 }

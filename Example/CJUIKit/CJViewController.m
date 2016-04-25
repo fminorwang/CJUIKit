@@ -82,7 +82,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [cell.textLabel setText:[NSString stringWithFormat:@"%ld-%ld",
-                             (long)indexPath.section, (long)indexPath.row]];
+                             (long)indexPath.section + 1, (long)indexPath.row + 1]];
 }
 
 @end
