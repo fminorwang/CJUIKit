@@ -11,11 +11,15 @@
 
 + (UIColor *)colorWithString:(NSString *)colorString
 {
-    if ( [colorString length] != 6 ) {
+    if ( [colorString length] != 7 ) {
         return nil;
     }
     
-    NSString *_capitalizedString = [colorString uppercaseString];
+    if ( [colorString hasPrefix:@"#"] ) {
+        return nil;
+    }
+    
+    NSString *_capitalizedString = [[colorString uppercaseString] substringFromIndex:1];
     
     char _ch1 = [_capitalizedString characterAtIndex:0];
     char _ch2 = [_capitalizedString characterAtIndex:1];
