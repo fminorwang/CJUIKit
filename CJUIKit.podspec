@@ -16,14 +16,12 @@ Pod::Spec.new do |s|
 #   * Try to keep it short, snappy and to the point.
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!  
-  s.description      = <<-DESC
-                       DESC
-
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/CJUIKit"
+  s.description      = "for general cj"
+  s.homepage         = "https://github.com/fminorwang/CJUIKit"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "fminor" => "fminor.wang@gmail.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/CJUIKit.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/fminorwang/CJUIKit.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '7.0'
@@ -35,6 +33,6 @@ Pod::Spec.new do |s|
   }
 
   s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  s.frameworks = 'Foundation', 'WebKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
