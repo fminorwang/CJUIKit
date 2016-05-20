@@ -10,6 +10,20 @@
 
 @implementation CJWebView
 
+- (instancetype)init
+{
+    return [self initWithWebViewType:CJWebViewTypeWKWebView];
+}
+
+- (instancetype)initWithWebViewType:(CJWebViewType)webViewType
+{
+    self = [super init];
+    if ( self ) {
+        _webViewType = webViewType;
+    }
+    return self;
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

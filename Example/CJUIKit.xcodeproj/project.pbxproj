@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2031219A1CEEE14B00107230 /* CJWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203121991CEEE14B00107230 /* CJWebViewController.m */; };
 		20B7ED271C3FAE340070B762 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20B7ED261C3FAE340070B762 /* Launch Screen.storyboard */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -38,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		0B78A108D9D860C86A1969B3 /* Pods-CJUIKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CJUIKit_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CJUIKit_Example/Pods-CJUIKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		203121981CEEE14B00107230 /* CJWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJWebViewController.h; sourceTree = "<group>"; };
+		203121991CEEE14B00107230 /* CJWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJWebViewController.m; sourceTree = "<group>"; };
 		20B7ED261C3FAE340070B762 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		24249609ADDD211DD401644E /* Pods-CJUIKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CJUIKit_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-CJUIKit_Example/Pods-CJUIKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* CJUIKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CJUIKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +154,8 @@
 				6003F5A6195388D20070C39A /* CJViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
+				203121981CEEE14B00107230 /* CJWebViewController.h */,
+				203121991CEEE14B00107230 /* CJWebViewController.m */,
 			);
 			name = "Example for CJUIKit";
 			path = CJUIKit;
@@ -396,6 +401,7 @@
 			files = (
 				6003F59E195388D20070C39A /* CJAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* CJViewController.m in Sources */,
+				2031219A1CEEE14B00107230 /* CJWebViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
