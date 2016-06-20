@@ -125,22 +125,6 @@
     END_USING_WK_WEB_VIEW
 }
 
-#pragma mark - internal method
-
-- (NSDictionary *)_parseUrlQueryToDictionary:(NSString *)query
-{
-    NSMutableDictionary *_params = [[NSMutableDictionary alloc] init];
-    NSArray *_components = [query componentsSeparatedByString:@"&"];
-    for ( NSString *_component in _components ) {
-        NSArray *_keyAndValue = [_component componentsSeparatedByString:@"="];
-        if ( [_keyAndValue count] != 2 ) {
-            continue;
-        }
-        [_params setObject:[_keyAndValue objectAtIndex:1]
-                    forKey:[_keyAndValue objectAtIndex:0]];
-    }
-}
-
 #pragma mark - UIWebView delegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -163,6 +147,7 @@
     
     CJActionHandler _handler = [_jsbridgeDict objectForKey:_action];
     _handler(_params);
+    return NO;
 }
 
 #pragma mark - WKWebView script delegate
