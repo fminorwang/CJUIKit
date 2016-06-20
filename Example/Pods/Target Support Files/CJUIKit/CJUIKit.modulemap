@@ -1,6 +1,0 @@
-framework module CJUIKit {
-  umbrella header "CJUIKit-umbrella.h"
-
-  export *
-  module * { export * }
-}

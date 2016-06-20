@@ -1,15 +1,15 @@
 {
   "name": "CJUIKit",
   "version": "0.1.0",
-  "summary": "A short description of CJUIKit.",
-  "description": "",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/CJUIKit",
+  "summary": "CJUIKit.",
+  "description": "for general cj",
+  "homepage": "https://github.com/fminorwang/CJUIKit",
   "license": "MIT",
   "authors": {
     "fminor": "fminor.wang@gmail.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/CJUIKit.git",
+    "git": "https://github.com/fminorwang/CJUIKit.git",
     "tag": "0.1.0"
   },
   "platforms": {
@@ -22,5 +22,9 @@
       "Pod/Assets/**/*"
     ]
   },
-  "public_header_files": "Pod/Classes/**/*.h"
+  "public_header_files": "Pod/Classes/**/*.h",
+  "frameworks": [
+    "Foundation",
+    "WebKit"
+  ]
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		206301481D17E67500D6A437 /* CJWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 206301471D17E67500D6A437 /* CJWebViewController.m */; };
 		20B7ED271C3FAE340070B762 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20B7ED261C3FAE340070B762 /* Launch Screen.storyboard */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -21,9 +22,8 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		6211093417DB66656C7BFE9A /* libPods-CJUIKit_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 411CB20F9257E78DBC1A0DB2 /* libPods-CJUIKit_Example.a */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		CF3891230C179D962FBB1513 /* Pods_CJUIKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D441491C26B8E9A1ABDC185A /* Pods_CJUIKit_Tests.framework */; };
-		E3D7EBD72EC377A05E214DE2 /* Pods_CJUIKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E25FB1C7B7A3458BFDC9A24B /* Pods_CJUIKit_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,9 +37,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B78A108D9D860C86A1969B3 /* Pods-CJUIKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CJUIKit_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CJUIKit_Example/Pods-CJUIKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		206301461D17E67500D6A437 /* CJWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJWebViewController.h; sourceTree = "<group>"; };
+		206301471D17E67500D6A437 /* CJWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJWebViewController.m; sourceTree = "<group>"; };
+		209F3A7E1CEEF99000EEC880 /* CJUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CJUIKit.framework; path = "DerivedData/CJUIKit/Build/Products/Debug-iphoneos/CJUIKit/CJUIKit.framework"; sourceTree = "<group>"; };
 		20B7ED261C3FAE340070B762 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		24249609ADDD211DD401644E /* Pods-CJUIKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CJUIKit_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-CJUIKit_Example/Pods-CJUIKit_Example.release.xcconfig"; sourceTree = "<group>"; };
+		411CB20F9257E78DBC1A0DB2 /* libPods-CJUIKit_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CJUIKit_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* CJUIKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CJUIKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -59,14 +61,13 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		61E117C48F847CAE2E3B7E37 /* Pods-CJUIKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CJUIKit_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CJUIKit_Tests/Pods-CJUIKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		7384E41E9D2C053F0499A04B /* Pods-CJUIKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CJUIKit_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CJUIKit_Tests/Pods-CJUIKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		87DC21D8D5DFC2CF66D66956 /* CJUIKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CJUIKit.podspec; path = ../CJUIKit.podspec; sourceTree = "<group>"; };
+		A69A39BCBBB3D0C5F0375336 /* Pods-CJUIKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CJUIKit_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-CJUIKit_Example/Pods-CJUIKit_Example.release.xcconfig"; sourceTree = "<group>"; };
+		CE365525F10678C785BCDF8B /* Pods_CJUIKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CJUIKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF10F964DA273F6BF4A23776 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		D441491C26B8E9A1ABDC185A /* Pods_CJUIKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CJUIKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5DCBBDA346E25B20830C0C6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		E25FB1C7B7A3458BFDC9A24B /* Pods_CJUIKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CJUIKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F15A0AEF1FC485382A4BFD92 /* Pods-CJUIKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CJUIKit_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CJUIKit_Example/Pods-CJUIKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +78,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				E3D7EBD72EC377A05E214DE2 /* Pods_CJUIKit_Example.framework in Frameworks */,
+				6211093417DB66656C7BFE9A /* libPods-CJUIKit_Example.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,20 +89,17 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				CF3891230C179D962FBB1513 /* Pods_CJUIKit_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		33F374BA16DCA9B81E3D619F /* Pods */ = {
+		53AD447841957FA6BB2A2871 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0B78A108D9D860C86A1969B3 /* Pods-CJUIKit_Example.debug.xcconfig */,
-				24249609ADDD211DD401644E /* Pods-CJUIKit_Example.release.xcconfig */,
-				61E117C48F847CAE2E3B7E37 /* Pods-CJUIKit_Tests.debug.xcconfig */,
-				7384E41E9D2C053F0499A04B /* Pods-CJUIKit_Tests.release.xcconfig */,
+				F15A0AEF1FC485382A4BFD92 /* Pods-CJUIKit_Example.debug.xcconfig */,
+				A69A39BCBBB3D0C5F0375336 /* Pods-CJUIKit_Example.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -114,7 +112,7 @@
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
-				33F374BA16DCA9B81E3D619F /* Pods */,
+				53AD447841957FA6BB2A2871 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,12 +128,13 @@
 		6003F58C195388D20070C39A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				209F3A7E1CEEF99000EEC880 /* CJUIKit.framework */,
 				6003F58D195388D20070C39A /* Foundation.framework */,
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				E25FB1C7B7A3458BFDC9A24B /* Pods_CJUIKit_Example.framework */,
-				D441491C26B8E9A1ABDC185A /* Pods_CJUIKit_Tests.framework */,
+				CE365525F10678C785BCDF8B /* Pods_CJUIKit_Tests.framework */,
+				411CB20F9257E78DBC1A0DB2 /* libPods-CJUIKit_Example.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -143,6 +142,8 @@
 		6003F593195388D20070C39A /* Example for CJUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				206301461D17E67500D6A437 /* CJWebViewController.h */,
+				206301471D17E67500D6A437 /* CJWebViewController.m */,
 				6003F59C195388D20070C39A /* CJAppDelegate.h */,
 				6003F59D195388D20070C39A /* CJAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
@@ -203,12 +204,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "CJUIKit_Example" */;
 			buildPhases = (
-				CD67BFA3F9F659261709BB4A /* Check Pods Manifest.lock */,
+				F8D8B9B91256196503CF8DEB /* 📦 Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				36D57895532735BE63F68F75 /* Embed Pods Frameworks */,
-				7F4A61F03AC5A1C0831C973C /* Copy Pods Resources */,
+				04C3227B946FBC28FC715DB2 /* 📦 Embed Pods Frameworks */,
+				54F09D5C80D7265EBFF5AE93 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -223,12 +224,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "CJUIKit_Tests" */;
 			buildPhases = (
-				5379C2C616E32E1A85B1BF1D /* Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				617059E36D4ED0E87EC45B0D /* Embed Pods Frameworks */,
-				5B891039EDCD59256FB4E4BA /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -297,14 +295,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		36D57895532735BE63F68F75 /* Embed Pods Frameworks */ = {
+		04C3227B946FBC28FC715DB2 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,59 +310,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CJUIKit_Example/Pods-CJUIKit_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5379C2C616E32E1A85B1BF1D /* Check Pods Manifest.lock */ = {
+		54F09D5C80D7265EBFF5AE93 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		5B891039EDCD59256FB4E4BA /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CJUIKit_Tests/Pods-CJUIKit_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		617059E36D4ED0E87EC45B0D /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CJUIKit_Tests/Pods-CJUIKit_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7F4A61F03AC5A1C0831C973C /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,14 +325,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CJUIKit_Example/Pods-CJUIKit_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CD67BFA3F9F659261709BB4A /* Check Pods Manifest.lock */ = {
+		F8D8B9B91256196503CF8DEB /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,6 +349,7 @@
 			files = (
 				6003F59E195388D20070C39A /* CJAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* CJViewController.m in Sources */,
+				206301481D17E67500D6A437 /* CJWebViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -513,11 +467,20 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0B78A108D9D860C86A1969B3 /* Pods-CJUIKit_Example.debug.xcconfig */;
+			baseConfigurationReference = F15A0AEF1FC485382A4BFD92 /* Pods-CJUIKit_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DerivedData/CJUIKit/Build/Products/Debug-iphoneos/CJUIKit",
+				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DerivedData/CJUIKit/Build/Products/Debug-iphoneos/CJUIKit",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CJUIKit/CJUIKit-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "CJUIKit/CJUIKit-Info.plist";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
@@ -528,11 +491,16 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 24249609ADDD211DD401644E /* Pods-CJUIKit_Example.release.xcconfig */;
+			baseConfigurationReference = A69A39BCBBB3D0C5F0375336 /* Pods-CJUIKit_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DerivedData/CJUIKit/Build/Products/Debug-iphoneos/CJUIKit",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CJUIKit/CJUIKit-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "CJUIKit/CJUIKit-Info.plist";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
@@ -543,7 +511,6 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 61E117C48F847CAE2E3B7E37 /* Pods-CJUIKit_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -567,7 +534,6 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7384E41E9D2C053F0499A04B /* Pods-CJUIKit_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
