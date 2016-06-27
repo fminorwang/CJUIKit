@@ -118,7 +118,7 @@
 {
     if ( [action length] == 0 ) return;
     if ( _jsbridgeDict == nil ) return;
-    [_jsbridgeDict setObject:nil forKey:action];
+    [_jsbridgeDict removeObjectForKey:action];
     
     BEGIN_USING_WK_WEB_VIEW
     [_wkConfig.userContentController removeScriptMessageHandlerForName:action];
