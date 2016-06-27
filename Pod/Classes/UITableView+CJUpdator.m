@@ -16,6 +16,7 @@
 #import "UITableView+CJUpdator.h"
 #import "CJPullUpdatorView.h"
 #import "CJTouchEndGestureRecognizer.h"
+#import "NSArray+CJUIKit.h"
 #import <objc/runtime.h>
 #import <objc/message.h>
 
@@ -149,12 +150,9 @@
 {
     BOOL _isRefresh = ( style == CJUpdatorStyleRefresh );
     NSInteger _tag = _isRefresh ? REFRESH_CONTAINER_TAG : LOADMORE_CONTAINER_TAG;
-    for ( UIView *_subview in self.subviews ) {
-        if ( _subview.tag == _tag ) {
-            return (CJPullUpdatorView *)_subview;
-        }
-    }
-    return nil;
+    return [self.subviews firstObjectWhere:^BOOL(UIView *obj) {
+        return obj.tag == _tag;
+    }];
 }
 
 - (void)_createRefreshContainer
@@ -202,11 +200,10 @@
 {
     BOOL _isRefresh = ( style == CJUpdatorStyleRefresh );
     NSInteger _tag = _isRefresh ? REFRESH_CONTAINER_TAG : LOADMORE_CONTAINER_TAG;
-    for ( UIView *_subview in self.subviews ) {
-        if ( _subview.tag == _tag ) {
-            return [_subview removeFromSuperview];
-        }
-    }
+    UIView *_updatorView = [self.subviews firstObjectWhere:^BOOL(UIView *subview) {
+        return subview.tag == _tag;
+    }];
+    [_updatorView removeFromSuperview];
 }
 
 #pragma mark - KVO

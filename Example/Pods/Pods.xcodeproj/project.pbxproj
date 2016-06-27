@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1A8F576A0D146301EC4F97E30EFD6180 /* UITableView+CJUpdator.m in Sources */ = {isa = PBXBuildFile; fileRef = 42169E93F8F48E5246E9F351E14E741F /* UITableView+CJUpdator.m */; };
+		20578A551D20F929009D3452 /* NSArray+CJUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 20578A531D20F929009D3452 /* NSArray+CJUIKit.h */; };
+		20578A561D20F929009D3452 /* NSArray+CJUIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 20578A541D20F929009D3452 /* NSArray+CJUIKit.m */; };
 		23FAD341C6D3D94A50EE69BF464958F5 /* CJTouchEndGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 48C298853AAB7B33B3C49DE7A1836BC4 /* CJTouchEndGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		264D9A15BFDAF3CC591753A70B490D93 /* CJPullUpdatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B745C86606A22609BB8DFB5C5C8ECE2 /* CJPullUpdatorView.m */; };
 		30145B578F78881C40070F8F8AD237CF /* CJWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA75ECB62B15B82A9938A02A3390032 /* CJWebView.m */; };
@@ -49,6 +51,8 @@
 		08DF0C22D36DFC15CB63211E8D03DD23 /* UIColor+CJUIKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CJUIKit.m"; sourceTree = "<group>"; };
 		0B745C86606A22609BB8DFB5C5C8ECE2 /* CJPullUpdatorView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CJPullUpdatorView.m; sourceTree = "<group>"; };
 		1BDCACBF06A338C97958FC8243C9142D /* libCJUIKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCJUIKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		20578A531D20F929009D3452 /* NSArray+CJUIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+CJUIKit.h"; sourceTree = "<group>"; };
+		20578A541D20F929009D3452 /* NSArray+CJUIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+CJUIKit.m"; sourceTree = "<group>"; };
 		22D62D79122DA5A4D4771B2D5D762A96 /* CJUIKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CJUIKit-dummy.m"; sourceTree = "<group>"; };
 		2A3A37A0295A696F4DDC79EE436B9711 /* Pods-CJUIKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CJUIKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		2DD4A360B35A618557F84EE9EE2ABBC0 /* pull-update-icon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "pull-update-icon.png"; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 				08DF0C22D36DFC15CB63211E8D03DD23 /* UIColor+CJUIKit.m */,
 				DC5F64AF9FF6615E1274040B0FCA3001 /* UITableView+CJUpdator.h */,
 				42169E93F8F48E5246E9F351E14E741F /* UITableView+CJUpdator.m */,
+				20578A531D20F929009D3452 /* NSArray+CJUIKit.h */,
+				20578A541D20F929009D3452 /* NSArray+CJUIKit.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -262,6 +268,7 @@
 				23FAD341C6D3D94A50EE69BF464958F5 /* CJTouchEndGestureRecognizer.h in Headers */,
 				4CFEFB452BDDFD564BF577D3E0283CEF /* CJWebView.h in Headers */,
 				BC10003DF069C8E63D112AD7E805EA3A /* NSString+CJUIKit.h in Headers */,
+				20578A551D20F929009D3452 /* NSArray+CJUIKit.h in Headers */,
 				9C882515EDA382DC4B9010C37D523D8D /* UIColor+CJUIKit.h in Headers */,
 				CCC394DC342946428B03E28D50E08020 /* UITableView+CJUpdator.h in Headers */,
 			);
@@ -377,6 +384,7 @@
 			files = (
 				264D9A15BFDAF3CC591753A70B490D93 /* CJPullUpdatorView.m in Sources */,
 				A6BB20ECD3169D546E54882A9E21CE85 /* CJTouchEndGestureRecognizer.m in Sources */,
+				20578A561D20F929009D3452 /* NSArray+CJUIKit.m in Sources */,
 				FA2D8F6495F2803D43E088A0F219ADB0 /* CJUIKit-dummy.m in Sources */,
 				30145B578F78881C40070F8F8AD237CF /* CJWebView.m in Sources */,
 				A26074E4D44AC620EFEAD5C88358F8CB /* NSString+CJUIKit.m in Sources */,

@@ -15,7 +15,7 @@
         return nil;
     }
     
-    if ( [colorString hasPrefix:@"#"] ) {
+    if ( ![colorString hasPrefix:@"#"] ) {
         return nil;
     }
     
