@@ -10,7 +10,7 @@
 
 @interface NSArray (CJUIKit)
 
-- (__kindof NSObject * _Nullable)firstObjectWhere:(BOOL (^)(__kindof NSObject * _Nonnull obj))condition;           // if condition is nil, then default condition always returns YES
+- (nullable __kindof NSObject *)firstObjectWhere:(nullable BOOL (^)(__kindof NSObject * obj))condition;           // if condition is nil, then default condition always returns YES
 
 - (void)each:(void (^)(__kindof NSObject *obj))action;
 - (void)each:(void (^)(__kindof NSObject *obj))action where:(BOOL (^)(__kindof NSObject *obj))condition;            // if condition is nil, then default condition always returns YES
