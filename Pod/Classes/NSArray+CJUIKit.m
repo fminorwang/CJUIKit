@@ -94,6 +94,12 @@
 REDUCE_IMPL(int, Int)
 REDUCE_IMPL(double, Double)
 REDUCE_IMPL(BOOL, Bool)
-REDUCE_IMPL(__kindof NSObject *, Object)
+- (NSObject *)reduceObject:(__kindof NSObject * _Nullable (^)(__kindof NSObject * _Nonnull, NSObject * _Nullable))reduceBlock initial:(NSObject *)initial
+{
+    if ( reduceBlock == nil ) return initial;
+    NSObject *_result = initial;
+    for ( NSObject *_obj in self ) _result = reduceBlock(_obj, _result);
+    return _result;
+}
 
 @end
