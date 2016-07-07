@@ -12,7 +12,6 @@
 
 + (UIColor *)colorWithString:(NSString *)colorString
 {
-    int _length = [colorString length];
     if ( ![colorString hasPrefix:@"#"] ) {
         return nil;
     }
@@ -23,10 +22,10 @@
     int _red = [_rs intValueWithHexadecimalFormat];
     
     NSString *_gs = [_capitalizedString substringWithRange:(NSRange){2, 2}];
-    int _green = [_rs intValueWithHexadecimalFormat];
+    int _green = [_gs intValueWithHexadecimalFormat];
     
     NSString *_bs = [_capitalizedString substringWithRange:(NSRange){4, 2}];
-    int _blue = [_rs intValueWithHexadecimalFormat];
+    int _blue = [_bs intValueWithHexadecimalFormat];
     
     int _alpha = 0xFF;
     if ( [_capitalizedString length] > 6 ) {
