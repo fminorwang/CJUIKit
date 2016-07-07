@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A8F576A0D146301EC4F97E30EFD6180 /* UITableView+CJUpdator.m in Sources */ = {isa = PBXBuildFile; fileRef = 42169E93F8F48E5246E9F351E14E741F /* UITableView+CJUpdator.m */; };
-		20578A551D20F929009D3452 /* NSArray+CJUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 20578A531D20F929009D3452 /* NSArray+CJUIKit.h */; };
+		20578A551D20F929009D3452 /* NSArray+CJUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 20578A531D20F929009D3452 /* NSArray+CJUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		20578A561D20F929009D3452 /* NSArray+CJUIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 20578A541D20F929009D3452 /* NSArray+CJUIKit.m */; };
 		23FAD341C6D3D94A50EE69BF464958F5 /* CJTouchEndGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 48C298853AAB7B33B3C49DE7A1836BC4 /* CJTouchEndGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		264D9A15BFDAF3CC591753A70B490D93 /* CJPullUpdatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B745C86606A22609BB8DFB5C5C8ECE2 /* CJPullUpdatorView.m */; };
@@ -268,8 +268,8 @@
 				23FAD341C6D3D94A50EE69BF464958F5 /* CJTouchEndGestureRecognizer.h in Headers */,
 				4CFEFB452BDDFD564BF577D3E0283CEF /* CJWebView.h in Headers */,
 				BC10003DF069C8E63D112AD7E805EA3A /* NSString+CJUIKit.h in Headers */,
-				20578A551D20F929009D3452 /* NSArray+CJUIKit.h in Headers */,
 				9C882515EDA382DC4B9010C37D523D8D /* UIColor+CJUIKit.h in Headers */,
+				20578A551D20F929009D3452 /* NSArray+CJUIKit.h in Headers */,
 				CCC394DC342946428B03E28D50E08020 /* UITableView+CJUpdator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
