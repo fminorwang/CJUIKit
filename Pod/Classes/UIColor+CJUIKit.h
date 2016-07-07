@@ -15,6 +15,6 @@
     #RRGGBB
     #RRGGBBAA
  */
-+ (nullable UIColor *)colorWithString:(NSString *)colorString;
++ (nullable UIColor *)colorWithString:(nonnull NSString *)colorString;
 
 @end
