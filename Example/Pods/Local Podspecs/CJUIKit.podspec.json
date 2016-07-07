@@ -1,6 +1,6 @@
 {
   "name": "CJUIKit",
-  "version": "0.1.0",
+  "version": "0.2.2",
   "summary": "CJUIKit.",
   "description": "for general cj",
   "homepage": "https://github.com/fminorwang/CJUIKit",
@@ -10,7 +10,8 @@
   },
   "source": {
     "git": "https://github.com/fminorwang/CJUIKit.git",
-    "tag": "0.1.0"
+    "branch": "0.2.2",
+    "tag": "0.2.2"
   },
   "platforms": {
     "ios": "7.0"
@@ -26,5 +27,10 @@
   "frameworks": [
     "Foundation",
     "WebKit"
-  ]
+  ],
+  "dependencies": {
+    "SDWebImage": [
+
+    ]
+  }
 }
