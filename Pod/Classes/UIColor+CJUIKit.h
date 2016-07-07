@@ -10,6 +10,11 @@
 
 @interface UIColor (CJUIKit)
 
-+ (UIColor *)colorWithString:(NSString *)colorString;
+/*
+ color string format:
+    #RRGGBB
+    #RRGGBBAA
+ */
++ (nullable UIColor *)colorWithString:(NSString *)colorString;
 
 @end

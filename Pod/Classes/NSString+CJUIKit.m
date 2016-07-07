@@ -35,3 +35,78 @@
 }
 
 @end
+
+@implementation NSString (CJFormat)
+
+- (int)intValueWithFormat:(CJFormat)format
+{
+    switch ( format ) {
+        case CJFormatDecimal: {
+            return [self _intValueWithMutiplier:10];
+            break;
+        }
+            
+        case CJFormatHexadecimal: {
+            return [self _intValueWithMutiplier:16];
+            break;
+        }
+            
+        case CJFormatOctal: {
+            return [self _intValueWithMutiplier:8];
+            break;
+        }
+            
+        default:
+            break;
+    }
+    return 0;
+}
+
+- (int)intValueWithHexadecimalFormat
+{
+    return [self intValueWithFormat:CJFormatHexadecimal];
+}
+
+- (int)intValueWithDecimalFormat
+{
+    return [self intValueWithFormat:CJFormatDecimal];
+}
+
+- (int)intValueWithOctalFormat
+{
+    return [self intValueWithFormat:CJFormatOctal];
+}
+
++ (int)_intValueFromChar:(char)ch
+{
+    if ( ch >= '0' && ch <= '9' ) {
+        return ch - '0';
+    }
+    
+    if ( ch >= 'A' && ch <= 'F' ) {
+        return ch - 'A' + 10;
+    }
+    
+    if ( ch >= 'a' && ch <= 'f' ) {
+        return ch - 'a' + 10;
+    }
+    
+    return -1;
+}
+
+- (int)_intValueWithMutiplier:(int)multiplier
+{
+    int _result = 0;
+    for ( int i = 0 ; i < [self length] ; i++ ) {
+        char _ch = [self characterAtIndex:i];
+        int _num = [NSString _intValueFromChar:_ch];
+        if ( _num < 0 ) {
+            // illegal
+            return -1;
+        }
+        _result = _result * multiplier + _num;
+    }
+    return _result;
+}
+
+@end
