@@ -6,6 +6,13 @@
 //
 //
 
+#import "UITableView+CJUpdator.h"
+#import "CJPullUpdatorView.h"
+#import "NSArray+CJUIKit.h"
+#import <objc/runtime.h>
+#import <objc/message.h>
+#import "CJTouchEndGestureRecognizer.h"
+
 #define DEFAULT_UPDATOR_HEIGHT                      44.f
 
 #define REFRESH_CONTAINER_TAG                       1225
@@ -13,12 +20,13 @@
 
 #define SCROLL_DURATION                             0.3f
 
-#import "UITableView+CJUpdator.h"
-#import "CJPullUpdatorView.h"
-#import "CJTouchEndGestureRecognizer.h"
-#import "NSArray+CJUIKit.h"
-#import <objc/runtime.h>
-#import <objc/message.h>
+#define pUpdateAnimationView                        "pUpdateAnimationView"
+#define pLoadmoreAnimationView                      "pLoadmoreAnimationView"
+#define pRefreshBlock                               "pRefreshBlock"
+#define pLoadmoreBlock                              "pLoadmoreBlock"
+#define pMinimumRefreshDuration                     "pMinimumRefreshDuration"
+#define pRefreshTimer                               "pRefreshTimer"
+#define pNeedsFinishUpdate                          "pNeedsFinishUpdate"
 
 @implementation UITableView (CJUpdator)
 
@@ -51,23 +59,10 @@
             break;
     }
     
-    if ( style != CJUpdatorStyleNone ) {
-        CJTouchEndGestureRecognizer *_endGesture = [[CJTouchEndGestureRecognizer alloc]
-                                                    initWithTarget:self action:@selector(_actionTouchesEnded:)];
-        
-        __strong UITableView *_sss = self;
-        SEL _selector = @selector(setDelegate:);
-        NSMethodSignature *_methodSig = [[CJTouchEndGestureRecognizer class] instanceMethodSignatureForSelector:_selector];
-        NSInvocation *_invocation = [NSInvocation invocationWithMethodSignature:_methodSig];
-        [_invocation setTarget:_endGesture];
-        [_invocation setSelector:_selector];
-        [_invocation setArgument:&_sss atIndex:2];
-        [_invocation retainArguments];
-        [_invocation invoke];
-        
-        [self addGestureRecognizer:_endGesture];
+    if ( style != CJUpdatorStyleNone ) {        
         [self addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
         [self addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+        [self.panGestureRecognizer addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:nil];
     } else {
     }
 }
@@ -84,35 +79,22 @@
 
 - (void)setRefreshBlock:(void (^)(void))block
 {
-    if ( block == nil ) {
-        return;
-    }
-    
-    CJPullUpdatorView *_pullUpdatorView = [self _getPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleRefresh];
-    if ( _pullUpdatorView == nil ) {
-        return;
-    }
-    
-    [_pullUpdatorView setUpdateAction:block];
+    objc_setAssociatedObject(self, pRefreshBlock, block, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
 - (void)setLoadMoreBlock:(void (^)(void))block
 {
-    if ( block == nil ) {
-        return;
-    }
-    
-    CJPullUpdatorView *_pullUpdatorView = [self _getPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleLoadmore];
-    if ( _pullUpdatorView == nil ) {
-        return;
-    }
-    
-    [_pullUpdatorView setUpdateAction:block];
+    objc_setAssociatedObject(self, pLoadmoreBlock, block, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
 - (void)finishUpdate
 {
     if ( [self isRefreshStyle] ) {
+        if ( [self _refreshTimer] ) {
+            [self _setNeedsFinishUpdate];
+            return;
+        }
+        
         CJPullUpdatorView *_refreshView = [self _getPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleRefresh];
         CJPullUpdatorView *_loadmoreView = [self _getPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleLoadmore];
         
@@ -131,7 +113,27 @@
         } completion:^(BOOL finished) {
             
         }];
+        
+        if ( self.updateAnimationView != nil ) {
+            [self.updateAnimationView stopUpdatingAnimation];
+        }
     }
+}
+
+#pragma mark - properties
+
+- (void)setMinimumRefreshDuration:(CGFloat)minimumRefreshDuration
+{
+    objc_setAssociatedObject(self, pMinimumRefreshDuration, [NSNumber numberWithFloat:minimumRefreshDuration], OBJC_ASSOCIATION_RETAIN);
+}
+
+- (CGFloat)minimumRefreshDuration
+{
+    NSNumber *_duration = objc_getAssociatedObject(self, pMinimumRefreshDuration);
+    if ( _duration == nil ) {
+        return 0.f;
+    }
+    return [_duration floatValue];
 }
 
 #pragma mark - pull container init & dealloc
@@ -206,6 +208,95 @@
     [_updatorView removeFromSuperview];
 }
 
+#pragma mark - animationView
+
+- (void)setUpdateAnimationView:(CJBasicPullUpdateAnimationView *)updateAnimationView
+{
+    objc_setAssociatedObject(self, pUpdateAnimationView, updateAnimationView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    BOOL _isAnimateView = ( updateAnimationView != nil );
+    [[self _refreshContainer] setHidden:_isAnimateView];
+    
+    if ( _isAnimateView ) {
+        CGRect _animate_view_frame = updateAnimationView.frame;
+        _animate_view_frame.origin.y = self.contentInset.top;
+        [updateAnimationView setFrame:_animate_view_frame];
+        
+        if ( self.backgroundView ) {
+            [self.backgroundView addSubview:updateAnimationView];
+        } else {
+            UIView *_backgroundView = [[UIView alloc] init];
+            [_backgroundView setFrame:self.bounds];
+            [_backgroundView setClipsToBounds:NO];
+            [_backgroundView addSubview:updateAnimationView];
+            [self setBackgroundView:_backgroundView];
+        }
+    }
+}
+
+- (void)setLoadmoreAnimationView:(CJBasicPullUpdateAnimationView *)loadmoreAnimationView
+{
+    objc_setAssociatedObject(self, pLoadmoreAnimationView, loadmoreAnimationView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (CJBasicPullUpdateAnimationView *)updateAnimationView
+{
+    return objc_getAssociatedObject(self, pUpdateAnimationView);
+}
+
+#pragma mark - internal
+
+- (void)_setRefreshTimer:(CGFloat)interval
+{
+    if ( fabs(interval) < 0.000001 ) {
+        [self _clearRefreshTimer];
+        return;
+    }
+    
+    [self _clearRefreshTimer];
+    NSTimer *_timer = [NSTimer timerWithTimeInterval:interval
+                                              target:self
+                                            selector:@selector(_actionTriggerRefreshTimer)
+                                            userInfo:nil
+                                             repeats:NO];
+    [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    objc_setAssociatedObject(self, pRefreshTimer, _timer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSTimer *)_refreshTimer
+{
+    return objc_getAssociatedObject(self, pRefreshTimer);
+}
+
+- (void)_clearRefreshTimer
+{
+    NSTimer *_timer = [self _refreshTimer];
+    if ( _timer != nil ) {
+        [_timer invalidate];
+        objc_setAssociatedObject(self, pRefreshTimer, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+}
+
+- (void)_actionTriggerRefreshTimer
+{
+    [self _clearRefreshTimer];
+    if ( [self _needsFinishUpdate] ) {
+        [self finishUpdate];
+        objc_setAssociatedObject(self, pNeedsFinishUpdate, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+}
+
+- (void)_setNeedsFinishUpdate
+{
+    objc_setAssociatedObject(self, pNeedsFinishUpdate, @YES, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)_needsFinishUpdate
+{
+    NSNumber *_needsFinishUpdate = objc_getAssociatedObject(self, pNeedsFinishUpdate);
+    if ( _needsFinishUpdate == nil ) return NO;
+    return [_needsFinishUpdate boolValue];
+}
+
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -213,12 +304,20 @@
                         change:(NSDictionary<NSString *,id> *)change
                        context:(void *)context
 {
-    if ( [keyPath isEqualToString:@"contentSize"] ) {
-        [self _actionContentSizeChanged];
+    if ( object == self ) {
+        if ( [keyPath isEqualToString:@"contentSize"] ) {
+            [self _actionContentSizeChanged];
+        }
+        
+        if ( [keyPath isEqualToString:@"contentOffset"] ) {
+            [self _actionContentOffsetChanged];
+        }
     }
     
-    if ( [keyPath isEqualToString:@"contentOffset"] ) {
-        [self _actionContentOffsetChanged];
+    if ( object == self.panGestureRecognizer ) {
+        if ( self.panGestureRecognizer.state == UIGestureRecognizerStateEnded ) {
+            [self _actionTouchesEnded:self.panGestureRecognizer];
+        }
     }
 }
 
@@ -252,6 +351,16 @@
             && _refreshView.pullState == CJPullUpdatorViewStateReadyToRefresh ) {
             [_refreshView resetImage];
         }
+        
+        CJBasicPullUpdateAnimationView *_updateAnimationView = [self updateAnimationView];
+        if ( _updateAnimationView ) {
+            CGFloat _current = -self.contentOffset.y - self.contentInset.top;
+            CGFloat _total = DEFAULT_UPDATOR_HEIGHT;
+            CGFloat _percent = _current / _total;
+            _percent = MIN(_percent, 1.0f);
+            _percent = MAX(0.f, _percent);
+            [_updateAnimationView setCurrentPullPercent:_percent];
+        }
     }
     
     // 加载更多
@@ -279,11 +388,27 @@
             [UIView animateWithDuration:SCROLL_DURATION delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 [self setContentInset:_insets];
             } completion:^(BOOL finished) {
+                if ( self.updateAnimationView ) {
+                    [self.updateAnimationView setCurrentPullPercent:0.f];
+                }
             }];
             
+            // 设置最短刷新时间
+            CGFloat _minimumRefreshDuration = [self minimumRefreshDuration];
+            if ( [self minimumRefreshDuration] > 0 ) {
+                [self _setRefreshTimer:_minimumRefreshDuration];
+            }
+            
+            // 开始刷新动画
+            if ( self.updateAnimationView != nil ) {
+                [self.updateAnimationView startUpdatingAnimation];
+            }
             [_refreshView beginAnimation];
-            if ( _refreshView.updateAction ) {
-                _refreshView.updateAction();
+            
+            // 刷新回调
+            void (^_refreshBlock)() = objc_getAssociatedObject(self, pRefreshBlock);
+            if ( _refreshBlock ) {
+                _refreshBlock();
             }
         }
     }
@@ -299,20 +424,21 @@
             }];
             
             [_loadmoreView beginAnimation];
-            if ( _loadmoreView.updateAction ) {
-                _loadmoreView.updateAction();
+            void (^_loadmoreBlock)() = objc_getAssociatedObject(self, pLoadmoreBlock);
+            if ( _loadmoreBlock ) {
+                _loadmoreBlock();
             }
         }
     }
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+//
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    if ( [gestureRecognizer isKindOfClass:[CJTouchEndGestureRecognizer class]] ) {
-        return YES;
-    }
-    
-    return NO;
+//    if ( [touch.view isKindOfClass:[UIControl class]] ) {
+//        return NO;
+//    }
+    return YES;
 }
 
 @end

@@ -7,12 +7,23 @@
 //
 
 #import "CJAppDelegate.h"
+#import <objc/runtime.h>
+#import <AdSupport/AdSupport.h>
+#import "CJURLProtocol.h"
+#import <CJRunTime.h>
 
 @implementation CJAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    // url protocol test
+//    [NSURLProtocol registerClass:[CJURLProtocol class]];
+    
+//    NSBundle *b = [NSBundle bundleWithPath:@"/System/Library/PrivateFrameworks/GraphicsServices.framework"];
+//    BOOL success = [b load];
+    
+//    Class _GSEvent = NSClassFromString(@"__GSEvent");
+    
     return YES;
 }
 

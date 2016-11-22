@@ -7,6 +7,7 @@
 //
 
 #import "CJWebViewController.h"
+#import "CJMaskView.h"
 
 @interface CJWebViewController ()
 
@@ -17,21 +18,35 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _webView = [[CJWebView alloc] init];
+    _webView = [[CJWebView alloc] initWithWebViewType:CJWebViewTypeUIWebView];
     [_webView setFrame:self.view.bounds];
     [self.view addSubview:_webView];
     
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://192.168.30.116:8081/awardPodcaster.html"]]];
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.qingting.fm/"]]];
     [_webView addJsbridgeAction:@"test" handler:^(NSDictionary *params) {
         UIAlertView *_alert = [[UIAlertView alloc]
                                initWithTitle:@"" message:@"test" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil];
         [_alert show];
     }];
+    
+    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(_actionBack)]];
+    
+//    CJMaskView *_maskView = [[CJMaskView alloc] init];
+//    [_maskView setFrame:self.view.bounds];
+//    [_maskView setBackgroundColor:[UIColor clearColor]];
+//    [self.view addSubview:_maskView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)_actionBack
+{
+    if ( [_webView canGoBack] ) {
+        [_webView goBack];
+    }
 }
 
 /*

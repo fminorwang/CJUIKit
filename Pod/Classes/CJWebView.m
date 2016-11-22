@@ -39,6 +39,8 @@
                 _wkConfig = [[WKWebViewConfiguration alloc] init];
                 _wkWebView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:_wkConfig];
                 [_wkWebView setTranslatesAutoresizingMaskIntoConstraints:NO];
+                [_wkWebView setUIDelegate:self];
+                [_wkWebView setNavigationDelegate:self];
                 [self addSubview:_wkWebView];
                 
                 NSDictionary *_views = NSDictionaryOfVariableBindings(_wkWebView);
@@ -96,6 +98,46 @@
             
         default:
             break;
+    }
+}
+
+- (BOOL)canGoBack
+{
+    switch ( _webViewType ) {
+        case CJWebViewTypeWKWebView: {
+            return [_wkWebView canGoBack];
+            break;
+        }
+            
+        case CJWebViewTypeUIWebView: {
+            return [_webView canGoBack];
+            break;
+        }
+            
+        default: {
+            return NO;
+            break;
+        }
+    }
+}
+
+- (void)goBack
+{
+    switch ( _webViewType ) {
+        case CJWebViewTypeWKWebView: {
+            [_wkWebView goBack];
+            break;
+        }
+            
+        case CJWebViewTypeUIWebView: {
+            [_webView goBack];
+            break;
+        }
+            
+        default: {
+            return;
+            break;
+        }
     }
 }
 

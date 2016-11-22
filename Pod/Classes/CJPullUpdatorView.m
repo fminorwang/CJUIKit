@@ -11,6 +11,8 @@
 #define UPDATE_ICON_NAME                        @"pull-update-icon"
 #define UPDATING_ICON_NAME                      @"pull-updating-icon"
 
+#define ICON_WH                                 30.f
+
 @implementation CJPullUpdatorView
 
 @synthesize updateAction = _updateAction;
@@ -37,11 +39,11 @@
 - (void)setFrame:(CGRect)frame
 {
     [super setFrame:frame];
-    [_pullImageView setFrame:CGRectMake(( self.bounds.size.width - self.bounds.size.height ) / 2,
-                                        0,
-                                        self.bounds.size.height,
-                                        self.bounds.size.height)];
-    [_pullImageView setContentMode:UIViewContentModeCenter];
+    [_pullImageView setFrame:CGRectMake(( self.bounds.size.width - ICON_WH ) / 2,
+                                        ( self.bounds.size.height - ICON_WH ) / 2,
+                                        ICON_WH,
+                                        ICON_WH)];
+    [_pullImageView setContentMode:UIViewContentModeScaleAspectFit];
 }
 
 - (void)reverseImage

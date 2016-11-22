@@ -14,6 +14,7 @@
  color string format:
     #RRGGBB
     #RRGGBBAA
+    #RRGGBB^0.1
  */
 + (nullable UIColor *)colorWithString:(nonnull NSString *)colorString;
 

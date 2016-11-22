@@ -32,6 +32,9 @@ typedef NS_ENUM(NSUInteger, CJWebViewType) {
 // web view method
 - (void)loadRequest:(NSURLRequest *)request;
 
+- (BOOL)canGoBack;
+- (void)goBack;
+
 // js-bridge interface
 
 /* 

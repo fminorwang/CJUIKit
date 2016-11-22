@@ -32,3 +32,14 @@ typedef NS_ENUM(NSInteger, CJFormat) {
 - (int)intValueWithOctalFormat;
 
 @end
+
+// 标记语言 CJML
+// 没有嵌套关系的简单 HTML
+@interface NSString (CJMarkedLanguage)
+
++ (void)registerAttributes:(NSDictionary *)attributes forAttributeName:(NSString *)attributeName;
+
+- (NSAttributedString *)markedAttributedStringWithNormalAttributes:(NSDictionary *)attributes;
+- (NSAttributedString *)markedAttributedStringWithNormalAttributes:(NSDictionary *)attributes baseFont:(UIFont *)baseFont;
+
+@end

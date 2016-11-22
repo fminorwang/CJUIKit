@@ -9,6 +9,7 @@
 #import "CJViewController.h"
 
 #import "CJUIKit-Prefix.pch"
+#import "CJMaskView.h"
 
 @interface CJViewController ()
 
@@ -113,6 +114,11 @@
     [cell.textLabel setText:[NSString stringWithFormat:@"%ld-%ld",
                              (long)indexPath.section + 1, (long)indexPath.row + 1]];
     [cell.textLabel setBackgroundColor:[UIColor clearColor]];
+}
+
+- (void)_privateMethod
+{
+    
 }
 
 @end
