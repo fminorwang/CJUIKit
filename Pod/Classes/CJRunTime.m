@@ -108,7 +108,7 @@
         [_log appendFormat:_format, _result];
         [_results addObject:_result];
     }
-    NSLog((NSString *)_log);
+    NSLog(@"%@", _log);
     return _results;
 }
 
@@ -130,7 +130,7 @@
                              _value];
         [_log appendFormat:@"\n%@", _result];
     }
-    NSLog((NSString *)_log);
+    NSLog(@"%@", _log);
     return _results;
 }
 
