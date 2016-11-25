@@ -48,11 +48,12 @@
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
-
 }
 
 - (UIImage *)_scaleFromImage:(UIImage*)image scaledToSize:(CGSize)newSize
 {
+    // to do
+    return nil;
 }
 
 
