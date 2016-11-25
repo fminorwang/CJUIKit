@@ -94,7 +94,7 @@
         Ivar _ivar = _ivarPtr[i];
         const char *_name = ivar_getName(_ivar);
         const char *_type = ivar_getTypeEncoding(_ivar);
-        NSString *_format = @"\n%s : %s";
+        NSString *_format = @"\n%@ : %@";
         [_log appendFormat:
          _format,
          [NSString stringWithCString:_name encoding:NSUTF8StringEncoding],
@@ -115,7 +115,7 @@
         const char *_name = ivar_getName(_ivar);
         const char *_type = ivar_getTypeEncoding(_ivar);
         id _value = object_getIvar(instance, _ivar);
-        [_log appendFormat:@"\n%s : %s = %p",
+        [_log appendFormat:@"\n%@ : %@ = %p",
          [NSString stringWithCString:_name encoding:NSUTF8StringEncoding],
          [NSString stringWithCString:_type encoding:NSUTF8StringEncoding],
          _value];
