@@ -15,6 +15,10 @@
 		1621B630206A29BB9B4120A53B2D6287 /* SDImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 11F9903267CA68F30E00A0239345863A /* SDImageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1CE70D19F5C7B0408D7A629270F1A51A /* CJTouchEndGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3702B57F50A003D40DEC9EAE175EA3 /* CJTouchEndGestureRecognizer.m */; };
 		1F73B2051594944C821FE17A35A236D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6C72FB8EFD10570BB74E23BA8484F45 /* Foundation.framework */; };
+		20924FDF1DE7E4A100BF0DD6 /* CJEmotionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 20924FDB1DE7E4A100BF0DD6 /* CJEmotionView.h */; };
+		20924FE01DE7E4A100BF0DD6 /* CJEmotionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20924FDC1DE7E4A100BF0DD6 /* CJEmotionView.m */; };
+		20924FE11DE7E4A100BF0DD6 /* UIImage+CJUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 20924FDD1DE7E4A100BF0DD6 /* UIImage+CJUIKit.h */; };
+		20924FE21DE7E4A100BF0DD6 /* UIImage+CJUIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 20924FDE1DE7E4A100BF0DD6 /* UIImage+CJUIKit.m */; };
 		247CB93B28DA192EB205529BE0B4AB5F /* NSArray+CJUIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F92FC5A604592981C7F82555E38F7F1 /* NSArray+CJUIKit.m */; };
 		2960794A801EB222A5942D6C78388542 /* CJAtlasScrollViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C157C02A3F44C5CECCA48934365A103A /* CJAtlasScrollViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2EEA909EE4720D3655F068F451CBDCBD /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 250BAE81BE304B444F381CD6FD11B6EF /* UIImageView+WebCache.m */; };
@@ -111,6 +115,10 @@
 		0F9AFCBC3F0A68082734F8DA5BCB0748 /* UITableView+CJUpdator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UITableView+CJUpdator.h"; sourceTree = "<group>"; };
 		11691340E7B985944FF9DE4CE80CEDFB /* CJPullUpdateAnimationView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CJPullUpdateAnimationView.h; sourceTree = "<group>"; };
 		11F9903267CA68F30E00A0239345863A /* SDImageCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDImageCache.h; path = SDWebImage/SDImageCache.h; sourceTree = "<group>"; };
+		20924FDB1DE7E4A100BF0DD6 /* CJEmotionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJEmotionView.h; sourceTree = "<group>"; };
+		20924FDC1DE7E4A100BF0DD6 /* CJEmotionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEmotionView.m; sourceTree = "<group>"; };
+		20924FDD1DE7E4A100BF0DD6 /* UIImage+CJUIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CJUIKit.h"; sourceTree = "<group>"; };
+		20924FDE1DE7E4A100BF0DD6 /* UIImage+CJUIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CJUIKit.m"; sourceTree = "<group>"; };
 		22B28D982A589941872911F22349FD95 /* SDWebImageDecoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDecoder.h; path = SDWebImage/SDWebImageDecoder.h; sourceTree = "<group>"; };
 		22D62D79122DA5A4D4771B2D5D762A96 /* CJUIKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CJUIKit-dummy.m"; sourceTree = "<group>"; };
 		24D67060642F46499091E7CE62BD9F9A /* UIButton+WebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIButton+WebCache.m"; path = "SDWebImage/UIButton+WebCache.m"; sourceTree = "<group>"; };
@@ -329,6 +337,10 @@
 		ADDE7B5F0D56B5D9A62EAB930C3E26F4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				20924FDB1DE7E4A100BF0DD6 /* CJEmotionView.h */,
+				20924FDC1DE7E4A100BF0DD6 /* CJEmotionView.m */,
+				20924FDD1DE7E4A100BF0DD6 /* UIImage+CJUIKit.h */,
+				20924FDE1DE7E4A100BF0DD6 /* UIImage+CJUIKit.m */,
 				C157C02A3F44C5CECCA48934365A103A /* CJAtlasScrollViewController.h */,
 				4A58E2FCC039E3712B9F100B79FCCCE9 /* CJAtlasScrollViewController.m */,
 				4DDA91E40A91EEAED33F70C983F5CDA7 /* CJBasicPullUpdateAnimationView.h */,
@@ -464,6 +476,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2960794A801EB222A5942D6C78388542 /* CJAtlasScrollViewController.h in Headers */,
+				20924FE11DE7E4A100BF0DD6 /* UIImage+CJUIKit.h in Headers */,
 				9633B71C28D6F8048ABE3DCD1B19F958 /* CJBasicPullUpdateAnimationView.h in Headers */,
 				502A57580E1EB33257CC4B44736056D3 /* CJPullUpdateAnimationView.h in Headers */,
 				73058285F5715AD3577091DB745DD32E /* CJPullUpdatorView.h in Headers */,
@@ -471,6 +484,7 @@
 				A7D7A7B675A59F56F62666C714F3D48C /* CJTouchEndGestureRecognizer.h in Headers */,
 				B2E0EBAF568E04675968E191721D7A14 /* CJWebView.h in Headers */,
 				69E3CA1D17372C9145B5575BA1277693 /* NSArray+CJUIKit.h in Headers */,
+				20924FDF1DE7E4A100BF0DD6 /* CJEmotionView.h in Headers */,
 				8C50F506A521DA4F252800D44903B1FC /* NSString+CJUIKit.h in Headers */,
 				FA16C159A304C05D105389E508D52130 /* UIColor+CJUIKit.h in Headers */,
 				660799CAAD791AA012B93FFFDA7BD683 /* UITableView+CJUpdator.h in Headers */,
@@ -639,10 +653,12 @@
 				65CF8221D5A21EB4A931A6E16B617CBD /* CJPullUpdatorView.m in Sources */,
 				0421067EA4A8B596A16A0C4779DB7510 /* CJRunTime.m in Sources */,
 				1CE70D19F5C7B0408D7A629270F1A51A /* CJTouchEndGestureRecognizer.m in Sources */,
+				20924FE01DE7E4A100BF0DD6 /* CJEmotionView.m in Sources */,
 				DDBF3E03EBA508AA9AB6D1D5CA99634C /* CJUIKit-dummy.m in Sources */,
 				5EAEE1E3E3ABA3C2C0DD6A5C3A2F24DE /* CJWebView.m in Sources */,
 				247CB93B28DA192EB205529BE0B4AB5F /* NSArray+CJUIKit.m in Sources */,
 				60B8E0A4A9EC66C9C884A7E888C098F3 /* NSString+CJUIKit.m in Sources */,
+				20924FE21DE7E4A100BF0DD6 /* UIImage+CJUIKit.m in Sources */,
 				0A951D92B639CF26B8298A552BD4D6E4 /* UIColor+CJUIKit.m in Sources */,
 				B1AECA4191F12BF9CAAA52AA84FF670C /* UITableView+CJUpdator.m in Sources */,
 			);

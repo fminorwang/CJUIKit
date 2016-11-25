@@ -7,7 +7,7 @@
 //
 
 #import "CJEmotionView.h"
-#import <SDWebImageManager.h>
+#import "SDWebImageManager.h"
 
 #define ANIMATE_COUNT                       10 // 50
 #define ANIMATE_EMOTION_DIAMETER            32.f
@@ -19,8 +19,7 @@ typedef NS_ENUM(NSUInteger, CJEmotionCollideType) {
 
 @interface CJEmotionView ()
 {
-    SKView                      *_skView;
-    SKScene                     *_presentScene;
+    
 }
 
 @end
@@ -75,8 +74,6 @@ typedef NS_ENUM(NSUInteger, CJEmotionCollideType) {
         _rainMinRotateRate = 0.5;
         _rainMaxRotateRate = 10;
         _rainTotalImageNumber = 20;
-        
-        _skView = [[SKView alloc] init];
     }
     return self;
 }

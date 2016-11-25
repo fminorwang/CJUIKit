@@ -246,7 +246,6 @@
     _cell.scrollContainer.delegate = self;
     
     void (^_reframe)(UIImage *) = ^(UIImage *image) {
-        CGRect _realFrame = [self _realFrameFromImageSize:image.size scrollContainerSize:_cell.scrollContainer.bounds.size];
         CGFloat _ratio_w = image.size.width / _cell.scrollContainer.bounds.size.width;
         CGFloat _ratio_h = image.size.height / _cell.scrollContainer.bounds.size.height;
         CGFloat _maxScale = MAX(_ratio_w, _ratio_h);
@@ -387,8 +386,8 @@
 - (void)_actionLongPress:(UIGestureRecognizer *)gesture
 {
     @try {
-        UIScrollView *_scrollView = gesture.view;
-        UIImageView *_imageView = [_scrollView.subviews firstObjectWhere:^BOOL(UIView *subview) {
+        UIScrollView *_scrollView = (UIScrollView *)gesture.view;
+        UIImageView *_imageView = (UIImageView *)[_scrollView.subviews firstObjectWhere:^BOOL(UIView *subview) {
             return ([subview isKindOfClass:[UIImageView class]]);
         }];
         _imageToBeSaved = _imageView.image;

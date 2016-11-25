@@ -19,4 +19,19 @@
     return self;
 }
 
+- (void)setCurrentPullPercent:(CGFloat)percent
+{
+    // override by subclass
+}
+
+- (void)startUpdatingAnimation
+{
+    // to do
+}
+
+- (void)stopUpdatingAnimation
+{
+    // to do
+}
+
 @end
