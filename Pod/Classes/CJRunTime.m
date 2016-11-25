@@ -17,6 +17,7 @@
     Method *_methodPtr = class_copyMethodList(cls, &_methodCount);
     
     NSMutableString *_output = [[NSMutableString alloc] init];
+    NSMutableArray *_results = [[NSMutableArray alloc] init];
     for ( int i = 0 ; i < _methodCount ; i++ ) {
         Method _method = _methodPtr[i];
         
@@ -42,10 +43,12 @@
         method_getReturnType(_method, _returnType, _returnTypeSize);
         NSString *_returnTypeStr = [[NSString alloc] initWithCString:_returnType encoding:NSUTF8StringEncoding];
         
-        [_output appendFormat:@"\n- (%@)%@%@", _returnTypeStr, _methodNameStr, _argDesc];
+        NSString *_result = [NSString stringWithFormat:@"- (%@)%@%@", _returnTypeStr, _methodNameStr, _argDesc];
+        [_output appendFormat:@"\n%@", _result];
+        [_results addObject:_result];
     }
     NSLog(@"%@", _output);
-    return nil;
+    return _results;
 }
 
 + (NSArray *)listClassMethodNameForClass:(Class)cls
@@ -54,6 +57,7 @@
     Method *_methodPtr = class_copyMethodList(object_getClass(cls), &_methodCount);
     
     NSMutableString *_output = [[NSMutableString alloc] init];
+    NSMutableArray *_results = [[NSMutableArray alloc] init];
     for ( int i = 0 ; i < _methodCount ; i++ ) {
         Method _method = _methodPtr[i];
         
@@ -79,34 +83,39 @@
         method_getReturnType(_method, _returnType, _returnTypeSize);
         NSString *_returnTypeStr = [[NSString alloc] initWithCString:_returnType encoding:NSUTF8StringEncoding];
         
+        NSString *_result = [NSString stringWithFormat:@"+ (%@)%@%@", _returnTypeStr, _methodNameStr, _argDesc];
         [_output appendFormat:@"\n+ (%@)%@%@", _returnTypeStr, _methodNameStr, _argDesc];
+        [_results addObject:_result];
     }
     NSLog(@"%@", _output);
-    return nil;
+    return _results;
 }
 
 + (NSArray *)listMemberNameForClass:(Class)cls
 {
     NSMutableString *_log = [[NSMutableString alloc] init];
+    NSMutableArray *_results = [[NSMutableArray alloc] init];
     unsigned int _count;
     Ivar *_ivarPtr = class_copyIvarList(cls, &_count);
     for ( int i = 0 ; i < _count ; i++ ) {
         Ivar _ivar = _ivarPtr[i];
         const char *_name = ivar_getName(_ivar);
         const char *_type = ivar_getTypeEncoding(_ivar);
-        NSString *_format = @"\n%@ : %@";
-        [_log appendFormat:
-         _format,
-         [NSString stringWithCString:_name encoding:NSUTF8StringEncoding],
-         [NSString stringWithCString:_type encoding:NSUTF8StringEncoding]];
+        NSString *_format = @"\n%@";
+        NSString *_result = [NSString stringWithFormat:@"%@ : %@",
+                             [NSString stringWithCString:_name encoding:NSUTF8StringEncoding],
+                             [NSString stringWithCString:_type encoding:NSUTF8StringEncoding]];
+        [_log appendFormat:_format, _result];
+        [_results addObject:_result];
     }
     NSLog((NSString *)_log);
-    return nil;
+    return _results;
 }
 
 + (NSArray *)listInstanceIvars:(NSObject *)instance
 {
     NSMutableString *_log = [[NSMutableString alloc] init];
+    NSMutableArray *_results = [[NSMutableArray alloc] init];
     Class _class = [instance class];
     unsigned int _ivarCount = 0;
     Ivar *_ivarPtr = class_copyIvarList(_class, &_ivarCount);
@@ -115,13 +124,14 @@
         const char *_name = ivar_getName(_ivar);
         const char *_type = ivar_getTypeEncoding(_ivar);
         id _value = object_getIvar(instance, _ivar);
-        [_log appendFormat:@"\n%@ : %@ = %p",
-         [NSString stringWithCString:_name encoding:NSUTF8StringEncoding],
-         [NSString stringWithCString:_type encoding:NSUTF8StringEncoding],
-         _value];
+        NSString *_result = [NSString stringWithFormat:@"%@ : %@ = %p",
+                             [NSString stringWithCString:_name encoding:NSUTF8StringEncoding],
+                             [NSString stringWithCString:_type encoding:NSUTF8StringEncoding],
+                             _value];
+        [_log appendFormat:@"\n%@", _result];
     }
     NSLog((NSString *)_log);
-    return nil;
+    return _results;
 }
 
 @end
