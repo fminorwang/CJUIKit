@@ -479,7 +479,7 @@
     UIImageView *_currentImageView = nil;
     for ( UIView *_subview in _subviews ) {
         if ( [_subview isKindOfClass:[UIImageView class]] ) {
-            _currentImageView = _subview;
+            _currentImageView = (UIImageView *)_subview;
             break;
         }
     }

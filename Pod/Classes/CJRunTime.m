@@ -93,7 +93,7 @@
     for ( int i = 0 ; i < _count ; i++ ) {
         Ivar _ivar = _ivarPtr[i];
         const char *_name = ivar_getName(_ivar);
-        char *_type = ivar_getTypeEncoding(_ivar);
+        const char *_type = ivar_getTypeEncoding(_ivar);
         [_log appendFormat:@"\n%s : %s", _name, _type];
     }
     NSLog(_log);
@@ -109,7 +109,7 @@
     for ( int i = 0 ; i < _ivarCount ; i++ ) {
         Ivar _ivar = _ivarPtr[i];
         const char *_name = ivar_getName(_ivar);
-        char *_type = ivar_getTypeEncoding(_ivar);
+        const char *_type = ivar_getTypeEncoding(_ivar);
         id _value = object_getIvar(instance, _ivar);
         [_log appendFormat:@"\n%s : %s = %p", _name, _type, _value];
     }
