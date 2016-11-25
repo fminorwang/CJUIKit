@@ -100,7 +100,7 @@
          [NSString stringWithCString:_name encoding:NSUTF8StringEncoding],
          [NSString stringWithCString:_type encoding:NSUTF8StringEncoding]];
     }
-    NSLog(_log);
+    NSLog((NSString *)_log);
     return nil;
 }
 
@@ -115,10 +115,12 @@
         const char *_name = ivar_getName(_ivar);
         const char *_type = ivar_getTypeEncoding(_ivar);
         id _value = object_getIvar(instance, _ivar);
-        [_log appendFormat:@"\n%s : %s = %p", _name,
-         [NSString stringWithCString:_type encoding:NSUTF8StringEncoding], _value];
+        [_log appendFormat:@"\n%s : %s = %p",
+         [NSString stringWithCString:_name encoding:NSUTF8StringEncoding],
+         [NSString stringWithCString:_type encoding:NSUTF8StringEncoding],
+         _value];
     }
-    NSLog(_log);
+    NSLog((NSString *)_log);
     return nil;
 }
 
