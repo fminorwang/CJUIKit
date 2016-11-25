@@ -94,7 +94,8 @@
         Ivar _ivar = _ivarPtr[i];
         const char *_name = ivar_getName(_ivar);
         const char *_type = ivar_getTypeEncoding(_ivar);
-        [_log appendFormat:@"\n%s : %s", _name, _type];
+        NSString *_format = @"\n%s : %s";
+        [_log appendFormat:_format, _name, _type];
     }
     NSLog(_log);
     return nil;
