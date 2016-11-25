@@ -15,7 +15,7 @@
 #define BEGIN_USING_WK_WEB_VIEW             if ( _webViewType == CJWebViewTypeWKWebView ) {
 #define END_USING_WK_WEB_VIEW               }
 
-@interface CJWebView () <UIWebViewDelegate, WKNavigationDelegate>
+@interface CJWebView () <UIWebViewDelegate, WKNavigationDelegate, WKUIDelegate>
 
 @end
 

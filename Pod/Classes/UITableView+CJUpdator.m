@@ -236,11 +236,34 @@
 - (void)setLoadmoreAnimationView:(CJBasicPullUpdateAnimationView *)loadmoreAnimationView
 {
     objc_setAssociatedObject(self, pLoadmoreAnimationView, loadmoreAnimationView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    BOOL _isAnimateView = ( loadmoreAnimationView != nil );
+    [[self _loadmoreContainer] setHidden:_isAnimateView];
+    
+    if ( loadmoreAnimationView ) {
+        CGRect _loadmore_frame = loadmoreAnimationView.frame;
+        _loadmore_frame.origin.y = self.bounds.size.height - _loadmore_frame.size.height - self.contentInset.bottom;
+        [loadmoreAnimationView setFrame:_loadmore_frame];
+        
+        if ( self.backgroundView ) {
+            [self.backgroundView addSubview:loadmoreAnimationView];
+        } else {
+            UIView *_backgroundView = [[UIView alloc] init];
+            [_backgroundView setFrame:self.bounds];
+            [_backgroundView setClipsToBounds:NO];
+            [_backgroundView addSubview:loadmoreAnimationView];
+            [self setBackgroundView:_backgroundView];
+        }
+    }
 }
 
 - (CJBasicPullUpdateAnimationView *)updateAnimationView
 {
     return objc_getAssociatedObject(self, pUpdateAnimationView);
+}
+
+- (CJBasicPullUpdateAnimationView *)loadmoreAnimationView
+{
+    return objc_getAssociatedObject(self, pLoadmoreAnimationView);
 }
 
 #pragma mark - internal
