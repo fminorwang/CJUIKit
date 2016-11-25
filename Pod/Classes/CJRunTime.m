@@ -95,7 +95,10 @@
         const char *_name = ivar_getName(_ivar);
         const char *_type = ivar_getTypeEncoding(_ivar);
         NSString *_format = @"\n%s : %s";
-        [_log appendFormat:_format, _name, _type];
+        [_log appendFormat:
+         _format,
+         [NSString stringWithCString:_name encoding:NSUTF8StringEncoding],
+         [NSString stringWithCString:_type encoding:NSUTF8StringEncoding]];
     }
     NSLog(_log);
     return nil;
@@ -112,7 +115,8 @@
         const char *_name = ivar_getName(_ivar);
         const char *_type = ivar_getTypeEncoding(_ivar);
         id _value = object_getIvar(instance, _ivar);
-        [_log appendFormat:@"\n%s : %s = %p", _name, _type, _value];
+        [_log appendFormat:@"\n%s : %s = %p", _name,
+         [NSString stringWithCString:_type encoding:NSUTF8StringEncoding], _value];
     }
     NSLog(_log);
     return nil;
