@@ -1,27 +1,19 @@
 //
-//  CJViewController.m
+//  CJTableViewController.m
 //  CJUIKit
 //
-//  Created by fminor on 01/08/2016.
-//  Copyright (c) 2016 fminor. All rights reserved.
+//  Created by fminor on 30/11/2016.
+//  Copyright © 2016 fminor. All rights reserved.
 //
 
-#import "CJViewController.h"
-
-#import "CJWebViewController.h"
 #import "CJTableViewController.h"
+#import <UITableView+CJUpdator.h>
 
-#import "CJUIKit-Prefix.pch"
-#import "CJMaskView.h"
-
-@interface CJViewController ()
-{
-    NSArray                 *_titles;
-}
+@interface CJTableViewController ()
 
 @end
 
-@implementation CJViewController
+@implementation CJTableViewController
 
 - (void)viewDidLoad
 {
@@ -36,7 +28,27 @@
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
     
-    _titles = @[@"UITableView+CJUpdator: 刷新与加载更多", @"CJWebView"];
+    [_tableView setTableUpdatorStyle:CJUpdatorStyleRefreshAndLoadmore];
+    __weak CJTableViewController *_wss = self;
+    [_tableView setRefreshBlock:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if ( _wss == nil ) {
+                return;
+            }
+            __strong CJTableViewController *_sss = _wss;
+            [_sss->_tableView finishUpdate];
+        });
+    }];
+    
+    [_tableView setLoadMoreBlock:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if ( _wss == nil ) {
+                return;
+            }
+            __strong CJTableViewController *_sss = _wss;
+            [_sss->_tableView finishUpdate];
+        });
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -56,29 +68,35 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 8;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 20.f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60.f;
+    return 50.f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *_cell = [tableView dequeueReusableCellWithIdentifier:@"view_cell"];
+    UITableViewCell *_cell = [tableView dequeueReusableCellWithIdentifier:@"demo_cell"];
     if ( _cell == nil ) {
-        _cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"view_cell"];
+        _cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"demo_cell"];
         
         UIView *_sepLine = [[UIView alloc] init];
         [_sepLine setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_sepLine setBackgroundColor:[UIColor grayColor]];
         [_cell.contentView addSubview:_sepLine];
+        
         NSDictionary *_views = NSDictionaryOfVariableBindings(_sepLine);
         [_cell.contentView addConstraints:[NSLayoutConstraint
                                            constraintsWithVisualFormat:@"H:|[_sepLine]|"
@@ -86,34 +104,16 @@
         [_cell.contentView addConstraints:[NSLayoutConstraint
                                            constraintsWithVisualFormat:@"V:[_sepLine(0.5)]|"
                                            options:0 metrics:nil views:_views]];
-        [_cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     return _cell;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [cell.textLabel setText:[NSString stringWithFormat:@"%ld-%ld",
+                             (long)indexPath.section + 1, (long)indexPath.row + 1]];
     [cell.textLabel setBackgroundColor:[UIColor clearColor]];
-    cell.textLabel.text = [_titles objectAtIndex:indexPath.row];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    switch ( indexPath.row ) {
-        case 0: {
-            CJTableViewController *_vc = [[CJTableViewController alloc] init];
-            [self.navigationController pushViewController:_vc animated:YES];
-            break;
-        }
-            
-        case 1: {
-            CJWebViewController *_vc = [[CJWebViewController alloc] init];
-            [self.navigationController pushViewController:_vc animated:YES];
-        }
-            
-        default:
-            break;
-    }
+    [cell.textLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
 }
 
 @end

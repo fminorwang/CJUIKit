@@ -12,6 +12,7 @@
 		206301481D17E67500D6A437 /* CJWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 206301471D17E67500D6A437 /* CJWebViewController.m */; };
 		209888F31D42356600AA886D /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209888F21D42356600AA886D /* AdSupport.framework */; };
 		209888FF1D45FEA700AA886D /* CJURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 209888FE1D45FEA700AA886D /* CJURLProtocol.m */; };
+		209AA3F71DEF251700AF78C5 /* CJTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209AA3F61DEF251700AF78C5 /* CJTableViewController.m */; };
 		20A1F3991D80195500E02496 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20A1F3981D80195500E02496 /* SpriteKit.framework */; };
 		20B7ED271C3FAE340070B762 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20B7ED261C3FAE340070B762 /* Launch Screen.storyboard */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -50,6 +51,8 @@
 		209888F21D42356600AA886D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		209888FD1D45FEA700AA886D /* CJURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJURLProtocol.h; sourceTree = "<group>"; };
 		209888FE1D45FEA700AA886D /* CJURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJURLProtocol.m; sourceTree = "<group>"; };
+		209AA3F51DEF251700AF78C5 /* CJTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJTableViewController.h; sourceTree = "<group>"; };
+		209AA3F61DEF251700AF78C5 /* CJTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJTableViewController.m; sourceTree = "<group>"; };
 		209F3A7E1CEEF99000EEC880 /* CJUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CJUIKit.framework; path = "DerivedData/CJUIKit/Build/Products/Debug-iphoneos/CJUIKit/CJUIKit.framework"; sourceTree = "<group>"; };
 		20A1F3981D80195500E02496 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		20B7ED261C3FAE340070B762 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -110,6 +113,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		209AA3F81DEF252400AF78C5 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				209AA3F51DEF251700AF78C5 /* CJTableViewController.h */,
+				209AA3F61DEF251700AF78C5 /* CJTableViewController.m */,
+			);
+			name = TableView;
+			sourceTree = "<group>";
+		};
+		209AA3F91DEF253500AF78C5 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				206301461D17E67500D6A437 /* CJWebViewController.h */,
+				206301471D17E67500D6A437 /* CJWebViewController.m */,
+			);
+			name = WebView;
+			sourceTree = "<group>";
+		};
 		53AD447841957FA6BB2A2871 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,8 +181,8 @@
 		6003F593195388D20070C39A /* Example for CJUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				206301461D17E67500D6A437 /* CJWebViewController.h */,
-				206301471D17E67500D6A437 /* CJWebViewController.m */,
+				209AA3F91DEF253500AF78C5 /* WebView */,
+				209AA3F81DEF252400AF78C5 /* TableView */,
 				6003F59C195388D20070C39A /* CJAppDelegate.h */,
 				6003F59D195388D20070C39A /* CJAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
@@ -377,6 +398,7 @@
 				209888FF1D45FEA700AA886D /* CJURLProtocol.m in Sources */,
 				2025E9551D476E88002E8698 /* CJMaskView.m in Sources */,
 				206301481D17E67500D6A437 /* CJWebViewController.m in Sources */,
+				209AA3F71DEF251700AF78C5 /* CJTableViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

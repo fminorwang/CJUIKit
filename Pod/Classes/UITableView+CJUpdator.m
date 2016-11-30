@@ -120,6 +120,13 @@
     }
 }
 
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"contentOffset"];
+    [self removeObserver:self forKeyPath:@"contentSize"];
+    [self.panGestureRecognizer removeObserver:self forKeyPath:@"state"];
+}
+
 #pragma mark - properties
 
 - (void)setMinimumRefreshDuration:(CGFloat)minimumRefreshDuration
@@ -455,12 +462,8 @@
     }
 }
 
-//
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-//    if ( [touch.view isKindOfClass:[UIControl class]] ) {
-//        return NO;
-//    }
     return YES;
 }
 
