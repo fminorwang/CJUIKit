@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CJBasicPullUpdateAnimationView.h"
 
 typedef NS_ENUM(NSInteger, CJPullUpdatorViewState) {
     CJPullUpdatorViewStateNormal,
@@ -14,7 +15,7 @@ typedef NS_ENUM(NSInteger, CJPullUpdatorViewState) {
     CJPullUpdatorViewStateAnimating
 };
 
-@interface CJPullUpdatorView : UIView
+@interface CJPullUpdatorView : CJBasicPullUpdateAnimationView
 {
     UIImageView                     *_pullImageView;
     UILabel                         *_descriptionLabel;
@@ -27,8 +28,5 @@ typedef NS_ENUM(NSInteger, CJPullUpdatorViewState) {
 
 - (void)reverseImage;
 - (void)resetImage;
-
-- (void)beginAnimation;
-- (void)stopAnimation;
 
 @end

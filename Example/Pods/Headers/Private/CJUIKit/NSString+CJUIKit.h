@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/NSString+CJUIKit.h
+../../../../../Pod/Classes/Utils/NSString+CJUIKit.h

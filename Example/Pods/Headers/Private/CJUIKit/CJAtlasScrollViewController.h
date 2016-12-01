@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/CJAtlasScrollViewController.h
+../../../../../Pod/Classes/Atlas/CJAtlasScrollViewController.h

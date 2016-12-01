@@ -46,6 +46,16 @@
     [_pullImageView setContentMode:UIViewContentModeScaleAspectFit];
 }
 
+- (void)startUpdatingAnimation
+{
+    [self _beginAnimation];
+}
+
+- (void)stopUpdatingAnimation
+{
+    [self _stopAnimation];
+}
+
 - (void)reverseImage
 {
     _pullState = CJPullUpdatorViewStateReadyToRefresh;
@@ -62,7 +72,7 @@
     }];
 }
 
-- (void)beginAnimation
+- (void)_beginAnimation
 {
     _pullState = CJPullUpdatorViewStateAnimating;
     
@@ -81,7 +91,7 @@
     [_pullImageView.layer addAnimation:_rotateAnimate forKey:@"rotate"];
 }
 
-- (void)stopAnimation
+- (void)_stopAnimation
 {
     _pullState = CJPullUpdatorViewStateNormal;
     

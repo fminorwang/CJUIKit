@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CJPullUpdateAnimationView.h"
+#import "CJPullUpdateAnimationProtocol.h"
 
-@interface CJBasicPullUpdateAnimationView : UIView<CJPullUpdateAnimationView>
+@interface CJBasicPullUpdateAnimationView : UIView<CJPullUpdateAnimationProtocol>
 
 @end

@@ -1,5 +1,5 @@
 PODS:
-  - CJUIKit (0.2.2):
+  - CJUIKit (0.2.3):
     - SDWebImage
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
@@ -13,7 +13,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  CJUIKit: 2eaad1adf4ea3cda6eeeb86f1bc379f8103328cb
+  CJUIKit: f54eab1f00adfec2ab60856576f15e6d2a24160d
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
 
 PODFILE CHECKSUM: 0a7f193fb4b5c6e5e17886d52110070991347884
