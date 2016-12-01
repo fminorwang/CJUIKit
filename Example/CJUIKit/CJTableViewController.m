@@ -19,36 +19,54 @@
 {
     [super viewDidLoad];
     [self.navigationController.navigationBar setTranslucent:YES];
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    _tableView = [[UITableView alloc] init];
-    [_tableView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-    [_tableView setBackgroundColor:[UIColor whiteColor]];
-    [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    [self.view addSubview:_tableView];
+    _container = [[UIScrollView alloc] init];
+    [_container setFrame:self.view.bounds];
+    [_container setPagingEnabled:YES];
+    [self.view addSubview:_container];
     
-    [_tableView setTableUpdatorStyle:CJUpdatorStyleRefreshAndLoadmore];
-    __weak CJTableViewController *_wss = self;
-    [_tableView setRefreshBlock:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if ( _wss == nil ) {
-                return;
-            }
-            __strong CJTableViewController *_sss = _wss;
-            [_sss->_tableView finishUpdate];
-        });
-    }];
+    NSArray *_styleArr = @[@(CJPullUpdatorViewStyleVertical),
+                           @(CJPullUpdatorViewStyleHorizontal)];
     
-    [_tableView setLoadMoreBlock:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if ( _wss == nil ) {
-                return;
-            }
-            __strong CJTableViewController *_sss = _wss;
-            [_sss->_tableView finishUpdate];
-        });
-    }];
+    for ( int i = 0 ; i < 2 ; i++ ) {
+        UITableView *_tableView = [[UITableView alloc] init];
+        [_tableView setFrame:CGRectMake(i * self.view.bounds.size.width, 0,
+                                        self.view.bounds.size.width, self.view.bounds.size.height)];
+        [_tableView setBackgroundColor:[UIColor whiteColor]];
+        [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        [_tableView setContentInset:UIEdgeInsetsMake(64.0, 0, 0, 0)];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        [_container addSubview:_tableView];
+        
+        [_tableView setTableUpdatorStyle:CJUpdatorStyleRefreshAndLoadmore];
+        [_tableView setRefreshStyle:[[_styleArr objectAtIndex:i] integerValue]];
+        
+        __weak UITableView *_wss = _tableView;
+        [_tableView setRefreshBlock:^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                if ( _wss == nil ) {
+                    return;
+                }
+                __strong UITableView *_sss = _wss;
+                [_sss finishUpdate];
+            });
+        }];
+        
+        [_tableView setLoadMoreBlock:^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                if ( _wss == nil ) {
+                    return;
+                }
+                __strong UITableView *_sss = _wss;
+                [_sss finishUpdate];
+            });
+        }];
+    }
+    
+    [_container setContentSize:CGSizeMake(self.view.bounds.size.width * 2, self.view.bounds.size.height)];
 }
 
 - (void)viewWillAppear:(BOOL)animated

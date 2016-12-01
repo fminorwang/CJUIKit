@@ -10,7 +10,7 @@
 
 @interface CJTableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 {
-    UITableView                     *_tableView;
+    UIScrollView                    *_container;
 }
 
 @end

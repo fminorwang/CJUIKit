@@ -26,7 +26,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self.navigationController.navigationBar setTranslucent:YES];
+    self.title = @"CJUIKit";
     
     _tableView = [[UITableView alloc] init];
     [_tableView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];

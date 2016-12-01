@@ -12,6 +12,8 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 #import "CJTouchEndGestureRecognizer.h"
+#import "CJPullRefreshView.h"
+#import "CJPullLoadmoreView.h"
 
 #define DEFAULT_UPDATOR_HEIGHT                      44.f
 
@@ -27,6 +29,8 @@
 #define pMinimumRefreshDuration                     "pMinimumRefreshDuration"
 #define pRefreshTimer                               "pRefreshTimer"
 #define pNeedsFinishUpdate                          "pNeedsFinishUpdate"
+#define pRefreshStyle                               "pRefreshStyle"
+#define pLoadmoreStyle                              "pLoadmoreStyle"
 
 @implementation UITableView (CJUpdator)
 
@@ -95,16 +99,16 @@
             return;
         }
         
-        CJPullUpdatorView *_refreshView = [self _getPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleRefresh];
-        CJPullUpdatorView *_loadmoreView = [self _getPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleLoadmore];
+        CJBasicPullUpdateAnimationView *_refreshView = [self _getPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleRefresh];
+        CJBasicPullUpdateAnimationView *_loadmoreView = [self _getPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleLoadmore];
         
         UIEdgeInsets _insets = self.contentInset;
-        if ( _refreshView && ( _refreshView.pullState == CJPullUpdatorViewStateAnimating )) {
-            [_refreshView stopAnimation];
+        if ( _refreshView && _refreshView.state == CJPullUpdateStateUpdating ) {
+            [_refreshView stopUpdatingAnimation];
             _insets.top -= _refreshView.bounds.size.height;
         }
-        if ( _loadmoreView && ( _loadmoreView.pullState == CJPullUpdatorViewStateAnimating )) {
-            [_loadmoreView stopAnimation];
+        if ( _loadmoreView && _loadmoreView.state == CJPullUpdateStateUpdating ) {
+            [_loadmoreView stopUpdatingAnimation];
             _insets.bottom -= _loadmoreView.bounds.size.height;
         }
 
@@ -143,19 +147,55 @@
     return [_duration floatValue];
 }
 
+- (void)setRefreshStyle:(CJPullUpdatorViewStyle)refreshStyle
+{
+    objc_setAssociatedObject(self, pRefreshStyle, @(refreshStyle), OBJC_ASSOCIATION_RETAIN);
+    CJPullRefreshView *_refreshView = [self _refreshContainer];
+    if ( [_refreshView isKindOfClass:[CJPullRefreshView class]] ) {
+        [_refreshView setStyle:refreshStyle];
+    }
+}
+
+- (CJPullUpdatorViewStyle)refreshStyle
+{
+    NSNumber *_styleNum = objc_getAssociatedObject(self, pRefreshStyle);
+    if ( _styleNum == nil ) {
+        return CJPullUpdatorViewStyleDefault;
+    }
+    return (CJPullUpdatorViewStyle)[_styleNum integerValue];
+}
+
+- (void)setLoadmoreStyle:(CJPullUpdatorViewStyle)loadmoreStyle
+{
+    objc_setAssociatedObject(self, pLoadmoreStyle, @(loadmoreStyle), OBJC_ASSOCIATION_RETAIN);
+    CJPullLoadmoreView *_loadmoreView = [self _loadmoreContainer];
+    if ( [_loadmoreView isKindOfClass:[CJPullRefreshView class]] ) {
+        [_loadmoreView setStyle:loadmoreStyle];
+    }
+}
+
+- (CJPullUpdatorViewStyle)loadmoreStyle
+{
+    NSNumber *_styleNum = objc_getAssociatedObject(self, pLoadmoreStyle);
+    if ( _styleNum == nil ) {
+        return CJPullUpdatorViewStyleDefault;
+    }
+    return (CJPullUpdatorViewStyle)[_styleNum integerValue];
+}
+
 #pragma mark - pull container init & dealloc
 
-- (CJPullUpdatorView *)_refreshContainer
+- (CJBasicPullUpdateAnimationView *)_refreshContainer
 {
     return [self _getPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleRefresh];
 }
 
-- (CJPullUpdatorView *)_loadmoreContainer
+- (CJBasicPullUpdateAnimationView *)_loadmoreContainer
 {
     return [self _getPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleLoadmore];
 }
 
-- (CJPullUpdatorView *)_getPullUpdatorContainerForUpdatorStyle:(CJUpdatorStyle)style
+- (CJBasicPullUpdateAnimationView *)_getPullUpdatorContainerForUpdatorStyle:(CJUpdatorStyle)style
 {
     BOOL _isRefresh = ( style == CJUpdatorStyleRefresh );
     NSInteger _tag = _isRefresh ? REFRESH_CONTAINER_TAG : LOADMORE_CONTAINER_TAG;
@@ -166,12 +206,20 @@
 
 - (void)_createRefreshContainer
 {
-    return [self _createPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleRefresh];
+    [self _createPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleRefresh];
+    CJPullUpdatorView *_updator = [self _refreshContainer];
+    if ( [_updator isKindOfClass:[CJPullUpdatorView class]] ) {
+        [_updator setStyle:[self refreshStyle]];
+    }
 }
 
 - (void)_createLoadmoreContainer
 {
-    return [self _createPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleLoadmore];
+    [self _createPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleLoadmore];
+    CJPullUpdatorView *_updator = [self _loadmoreContainer];
+    if ( [_updator isKindOfClass:[CJPullUpdatorView class]] ) {
+        [_updator setStyle:[self loadmoreStyle]];
+    }
 }
 
 - (void)_createPullUpdatorContainerForUpdatorStyle:(CJUpdatorStyle)style
@@ -184,7 +232,12 @@
         }
     }
     
-    CJPullUpdatorView *_pullUpdatorContainer = [[CJPullUpdatorView alloc] init];
+    CJPullUpdatorView *_pullUpdatorContainer;
+    if ( style == CJUpdatorStyleRefresh ) {
+        _pullUpdatorContainer = [[CJPullRefreshView alloc] init];
+    } else if ( style == CJUpdatorStyleLoadmore ) {
+        _pullUpdatorContainer = [[CJPullLoadmoreView alloc] init];
+    }
     CGRect _container_frame = CGRectMake(0,
                                          _isRefresh ? (-DEFAULT_UPDATOR_HEIGHT) : self.contentSize.height,
                                          self.bounds.size.width,
@@ -353,7 +406,7 @@
 
 - (void)_actionContentSizeChanged
 {
-    CJPullUpdatorView *_loadmoreView = [self _loadmoreContainer];
+    CJBasicPullUpdateAnimationView *_loadmoreView = [self _loadmoreContainer];
     if ( _loadmoreView == nil ) {
         return;
     }
@@ -370,38 +423,38 @@
 - (void)_actionContentOffsetChanged
 {
     // 刷新
-    CJPullUpdatorView *_refreshView = [self _refreshContainer];
+    CJBasicPullUpdateAnimationView *_refreshView = [self _refreshContainer];
     if ( _refreshView != nil ) {
         if (( self.contentOffset.y <= - DEFAULT_UPDATOR_HEIGHT - self.contentInset.top )
-            && ( _refreshView.pullState == CJPullUpdatorViewStateNormal )) {
-            [_refreshView reverseImage];
+            && ( _refreshView.state == CJPullUpdatorViewStateNormal )) {
+            [_refreshView readyToUpdate];
         }
         
         if (( self.contentOffset.y > - DEFAULT_UPDATOR_HEIGHT - self.contentInset.top )
-            && _refreshView.pullState == CJPullUpdatorViewStateReadyToRefresh ) {
-            [_refreshView resetImage];
-        }
-        
-        CJBasicPullUpdateAnimationView *_updateAnimationView = [self updateAnimationView];
-        if ( _updateAnimationView ) {
-            CGFloat _current = -self.contentOffset.y - self.contentInset.top;
-            CGFloat _total = DEFAULT_UPDATOR_HEIGHT;
-            CGFloat _percent = _current / _total;
-            _percent = MIN(_percent, 1.0f);
-            _percent = MAX(0.f, _percent);
-            [_updateAnimationView setCurrentPullPercent:_percent];
+            && _refreshView.state == CJPullUpdateStateReadyToUpdate ) {
+            [_refreshView changeToNormal];
         }
     }
     
+    CJBasicPullUpdateAnimationView *_updateAnimationView = [self updateAnimationView];
+    if ( _updateAnimationView ) {
+        CGFloat _current = -self.contentOffset.y - self.contentInset.top;
+        CGFloat _total = DEFAULT_UPDATOR_HEIGHT;
+        CGFloat _percent = _current / _total;
+        _percent = MIN(_percent, 1.0f);
+        _percent = MAX(0.f, _percent);
+        [_updateAnimationView setCurrentPullPercent:_percent];
+    }
+    
     // 加载更多
-    CJPullUpdatorView *_loadmoreView = [self _loadmoreContainer];
+    CJBasicPullUpdateAnimationView *_loadmoreView = [self _loadmoreContainer];
     if ( _loadmoreView != nil ) {
-        if (( self.contentOffset.y + self.bounds.size.height >= self.contentSize.height + DEFAULT_UPDATOR_HEIGHT + self.contentInset.bottom ) && _loadmoreView.pullState == CJPullUpdatorViewStateNormal ) {
-            [_loadmoreView reverseImage];
+        if (( self.contentOffset.y + self.bounds.size.height >= self.contentSize.height + DEFAULT_UPDATOR_HEIGHT + self.contentInset.bottom ) && _loadmoreView.state == CJPullUpdateStateNormal ) {
+            [_loadmoreView readyToUpdate];
         }
         
-        if (( self.contentOffset.y + self.bounds.size.height < self.contentSize.height + DEFAULT_UPDATOR_HEIGHT + self.contentInset.bottom ) && _loadmoreView.pullState == CJPullUpdatorViewStateReadyToRefresh ) {
-            [_loadmoreView resetImage];
+        if (( self.contentOffset.y + self.bounds.size.height < self.contentSize.height + DEFAULT_UPDATOR_HEIGHT + self.contentInset.bottom ) && _loadmoreView.state == CJPullUpdatorViewStateReadyToUpdate ) {
+            [_loadmoreView changeToNormal];
         }
     }
 }
@@ -411,8 +464,8 @@
 - (void)_actionTouchesEnded:(UIGestureRecognizer *)gesture
 {
     if ( [self isRefreshStyle] ) {
-        CJPullUpdatorView *_refreshView = [self _refreshContainer];
-        if ( _refreshView.pullState == CJPullUpdatorViewStateReadyToRefresh ) {
+        CJBasicPullUpdateAnimationView *_refreshView = [self _refreshContainer];
+        if ( _refreshView.state == CJPullUpdatorViewStateReadyToUpdate ) {
             UIEdgeInsets _insets = self.contentInset;
             _insets.top += _refreshView.bounds.size.height;
             [UIView animateWithDuration:SCROLL_DURATION delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -433,7 +486,7 @@
             if ( self.updateAnimationView != nil ) {
                 [self.updateAnimationView startUpdatingAnimation];
             }
-            [_refreshView beginAnimation];
+            [_refreshView startUpdatingAnimation];
             
             // 刷新回调
             void (^_refreshBlock)() = objc_getAssociatedObject(self, pRefreshBlock);
@@ -444,8 +497,8 @@
     }
     
     if ( [self isLoadmoreStyle] ) {
-        CJPullUpdatorView *_loadmoreView = [self _loadmoreContainer];
-        if ( _loadmoreView.pullState == CJPullUpdatorViewStateReadyToRefresh ) {
+        CJBasicPullUpdateAnimationView *_loadmoreView = [self _loadmoreContainer];
+        if ( _loadmoreView.state == CJPullUpdatorViewStateReadyToUpdate ) {
             UIEdgeInsets _insets = self.contentInset;
             _insets.bottom += _loadmoreView.bounds.size.height;
             [UIView animateWithDuration:SCROLL_DURATION delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -453,7 +506,7 @@
             } completion:^(BOOL finished) {
             }];
             
-            [_loadmoreView beginAnimation];
+            [_loadmoreView startUpdatingAnimation];
             void (^_loadmoreBlock)() = objc_getAssociatedObject(self, pLoadmoreBlock);
             if ( _loadmoreBlock ) {
                 _loadmoreBlock();

@@ -8,25 +8,31 @@
 
 #import <UIKit/UIKit.h>
 #import "CJBasicPullUpdateAnimationView.h"
+#import "CJUIKit.h"
 
 typedef NS_ENUM(NSInteger, CJPullUpdatorViewState) {
     CJPullUpdatorViewStateNormal,
-    CJPullUpdatorViewStateReadyToRefresh,
+    CJPullUpdatorViewStateReadyToUpdate,
     CJPullUpdatorViewStateAnimating
+};
+
+typedef NS_ENUM(NSInteger, CJPullUpdatorViewStyle) {
+    CJPullUpdatorViewStyleDefault           = 0,
+    CJPullUpdatorViewStyleHorizontal        = 1,
+    CJPullUpdatorViewStyleVertical          = CJPullUpdatorViewStyleDefault,
+    CJPullUpdatorViewStyleNoText            = 2,
 };
 
 @interface CJPullUpdatorView : CJBasicPullUpdateAnimationView
 {
     UIImageView                     *_pullImageView;
     UILabel                         *_descriptionLabel;
-    
-    void (^_updateAction)(void);
 }
 
-@property (nonatomic, readonly)     CJPullUpdatorViewState              pullState;
-@property (nonatomic, strong)       void (^updateAction)();
+@property (nonatomic, assign) CJPullUpdatorViewStyle style;
 
-- (void)reverseImage;
-- (void)resetImage;
+@property (nonatomic, strong) UIFont *font;
+@property (nonatomic, strong) UIColor *textColor;
+@property (nonatomic, assign) CGFloat innerMargin;
 
 @end

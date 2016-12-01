@@ -24,14 +24,32 @@
     // override by subclass
 }
 
+- (void)readyToUpdate
+{
+    self.state = CJPullUpdateStateReadyToUpdate;
+    
+    // override by subclass
+}
+
+- (void)changeToNormal
+{
+    self.state = CJPullUpdateStateNormal;
+    
+    // override by subclass
+}
+
 - (void)startUpdatingAnimation
 {
-    // to do
+    self.state = CJPullUpdateStateUpdating;
+    
+    // override by subclass
 }
 
 - (void)stopUpdatingAnimation
 {
-    // to do
+    self.state = CJPullUpdateStateNormal;
+    
+    // override by subclass
 }
 
 @end
