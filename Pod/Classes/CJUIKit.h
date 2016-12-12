@@ -6,6 +6,9 @@
 //
 //
 
+#import "UIImage+CJUIKit.h"
+#import "UIColor+CJUIKit.h"
+
 #import "CJPullUpdatorView.h"
 
 #define CJ_X_FROM_LEFT_NEIGHBOUR(neighbour, margin)     ( neighbour.frame.origin.x + neighbour.bounds.size.width + margin )

@@ -12,7 +12,26 @@
 
 + (UIImage *)imageWithColor:(UIColor *)color
 {
-    CGRect _rect = CGRectMake(0, 0, 1, 1);
+    return [UIImage imageWithColor:color size:CGSizeMake(1, 1)];
+}
+
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size
+{
+    CGRect _rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContext(_rect.size);
+    CGContextRef _context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(_context, [color CGColor]);
+    CGContextFillRect(_context, _rect);
+    
+    UIImage *_image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return _image;
+}
+
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size cornerRadius:(CGFloat)cornerRadius
+{
+    CGRect _rect = CGRectMake(0, 0, size.width, size.height);
     UIGraphicsBeginImageContext(_rect.size);
     CGContextRef _context = UIGraphicsGetCurrentContext();
     

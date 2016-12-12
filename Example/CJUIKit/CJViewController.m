@@ -111,6 +111,7 @@
         case 1: {
             CJWebViewController *_vc = [[CJWebViewController alloc] init];
             [self.navigationController pushViewController:_vc animated:YES];
+            break;
         }
             
         default:

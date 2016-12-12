@@ -126,9 +126,15 @@
 
 - (void)dealloc
 {
-    [self removeObserver:self forKeyPath:@"contentOffset"];
-    [self removeObserver:self forKeyPath:@"contentSize"];
-    [self.panGestureRecognizer removeObserver:self forKeyPath:@"state"];
+    @try {
+        [self removeObserver:self forKeyPath:@"contentOffset"];
+        [self removeObserver:self forKeyPath:@"contentSize"];
+        [self.panGestureRecognizer removeObserver:self forKeyPath:@"state"];
+    } @catch (NSException *exception) {
+        
+    } @finally {
+        
+    }
 }
 
 #pragma mark - properties

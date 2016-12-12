@@ -15,6 +15,7 @@
 		209AA3F71DEF251700AF78C5 /* CJTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209AA3F61DEF251700AF78C5 /* CJTableViewController.m */; };
 		20A1F3991D80195500E02496 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20A1F3981D80195500E02496 /* SpriteKit.framework */; };
 		20B7ED271C3FAE340070B762 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20B7ED261C3FAE340070B762 /* Launch Screen.storyboard */; };
+		20C1D7A31DFEFE2600F3A016 /* TSUpdateAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C1D7A21DFEFE2600F3A016 /* TSUpdateAnimationView.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -56,6 +57,8 @@
 		209F3A7E1CEEF99000EEC880 /* CJUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CJUIKit.framework; path = "DerivedData/CJUIKit/Build/Products/Debug-iphoneos/CJUIKit/CJUIKit.framework"; sourceTree = "<group>"; };
 		20A1F3981D80195500E02496 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		20B7ED261C3FAE340070B762 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		20C1D7A11DFEFE2600F3A016 /* TSUpdateAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSUpdateAnimationView.h; sourceTree = "<group>"; };
+		20C1D7A21DFEFE2600F3A016 /* TSUpdateAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSUpdateAnimationView.m; sourceTree = "<group>"; };
 		411CB20F9257E78DBC1A0DB2 /* libPods-CJUIKit_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CJUIKit_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* CJUIKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CJUIKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -118,6 +121,8 @@
 			children = (
 				209AA3F51DEF251700AF78C5 /* CJTableViewController.h */,
 				209AA3F61DEF251700AF78C5 /* CJTableViewController.m */,
+				20C1D7A11DFEFE2600F3A016 /* TSUpdateAnimationView.h */,
+				20C1D7A21DFEFE2600F3A016 /* TSUpdateAnimationView.m */,
 			);
 			name = TableView;
 			sourceTree = "<group>";
@@ -400,6 +405,7 @@
 				206301481D17E67500D6A437 /* CJWebViewController.m in Sources */,
 				209AA3F71DEF251700AF78C5 /* CJTableViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				20C1D7A31DFEFE2600F3A016 /* TSUpdateAnimationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

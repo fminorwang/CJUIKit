@@ -8,6 +8,7 @@
 
 #import "CJTableViewController.h"
 #import <UITableView+CJUpdator.h>
+#import "TSUpdateAnimationView.h"
 
 @interface CJTableViewController ()
 
@@ -30,6 +31,7 @@
     NSArray *_styleArr = @[@(CJPullUpdatorViewStyleVertical),
                            @(CJPullUpdatorViewStyleHorizontal)];
     
+    // style 1, 2
     for ( int i = 0 ; i < 2 ; i++ ) {
         UITableView *_tableView = [[UITableView alloc] init];
         [_tableView setFrame:CGRectMake(i * self.view.bounds.size.width, 0,
@@ -66,7 +68,32 @@
         }];
     }
     
-    [_container setContentSize:CGSizeMake(self.view.bounds.size.width * 2, self.view.bounds.size.height)];
+    // style 3: custom refresh view
+    UITableView *_customRefreshTableView = [[UITableView alloc]
+                                            initWithFrame:CGRectMake(2 * _container.bounds.size.width,
+                                                                     0,
+                                                                     _container.bounds.size.width,
+                                                                     _container.bounds.size.height)
+                                            style:UITableViewStylePlain];
+    [_customRefreshTableView setContentInset:UIEdgeInsetsMake(64.0, 0, 0, 0)];
+    [_customRefreshTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    _customRefreshTableView.delegate = self;
+    _customRefreshTableView.dataSource = self;
+    __weak UITableView *_wTable = _customRefreshTableView;
+    [_customRefreshTableView setTableUpdatorStyle:CJUpdatorStyleRefresh];
+    [_customRefreshTableView setUpdateAnimationView:[[TSUpdateAnimationView alloc] init]];
+    [_customRefreshTableView setRefreshBlock:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if ( _wTable == nil ) {
+                return;
+            }
+            __strong UITableView *_sTable = _wTable;
+            [_sTable finishUpdate];
+        });
+    }];
+    [_container addSubview:_customRefreshTableView];
+    
+    [_container setContentSize:CGSizeMake(self.view.bounds.size.width * 3, self.view.bounds.size.height)];
 }
 
 - (void)viewWillAppear:(BOOL)animated
