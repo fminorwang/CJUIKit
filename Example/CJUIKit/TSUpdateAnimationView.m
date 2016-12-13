@@ -95,6 +95,9 @@
         [_rightEye setBackgroundColor:_eyeColor.CGColor];
         [_rightEye setOpacity:0];
         [self.layer addSublayer:_rightEye];
+        
+        [self setBackgroundColor:[UIColor whiteColor]];
+        [self setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40.0)];
     }
     return self;
 }

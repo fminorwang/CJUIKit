@@ -449,7 +449,7 @@
         CGFloat _percent = _current / _total;
         _percent = MIN(_percent, 1.0f);
         _percent = MAX(0.f, _percent);
-        [_updateAnimationView setCurrentPullPercent:_percent];
+        [_updateAnimationView setCurrentPullPercent:1.0];
     }
     
     // 加载更多
@@ -499,6 +499,11 @@
             if ( _refreshBlock ) {
                 _refreshBlock();
             }
+        }
+        
+        CJBasicPullUpdateAnimationView *_customRefreshView = [self updateAnimationView];
+        if ( _customRefreshView ) {
+            [_customRefreshView startUpdatingAnimation];
         }
     }
     

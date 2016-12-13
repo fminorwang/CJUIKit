@@ -11,6 +11,9 @@
 #import "TSUpdateAnimationView.h"
 
 @interface CJTableViewController ()
+{
+    NSArray *_titles;
+}
 
 @end
 
@@ -26,10 +29,12 @@
     _container = [[UIScrollView alloc] init];
     [_container setFrame:self.view.bounds];
     [_container setPagingEnabled:YES];
+    _container.delegate = self;
     [self.view addSubview:_container];
     
     NSArray *_styleArr = @[@(CJPullUpdatorViewStyleVertical),
                            @(CJPullUpdatorViewStyleHorizontal)];
+    _titles = @[@"vertical", @"horizontal", @"custom"];
     
     // style 1, 2
     for ( int i = 0 ; i < 2 ; i++ ) {
@@ -45,6 +50,7 @@
         
         [_tableView setTableUpdatorStyle:CJUpdatorStyleRefreshAndLoadmore];
         [_tableView setRefreshStyle:[[_styleArr objectAtIndex:i] integerValue]];
+        [_tableView setLoadmoreStyle:[[_styleArr objectAtIndex:i] integerValue]];
         
         __weak UITableView *_wss = _tableView;
         [_tableView setRefreshBlock:^{
@@ -75,13 +81,16 @@
                                                                      _container.bounds.size.width,
                                                                      _container.bounds.size.height)
                                             style:UITableViewStylePlain];
+    [_customRefreshTableView setBackgroundColor:[UIColor whiteColor]];
     [_customRefreshTableView setContentInset:UIEdgeInsetsMake(64.0, 0, 0, 0)];
     [_customRefreshTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     _customRefreshTableView.delegate = self;
     _customRefreshTableView.dataSource = self;
     __weak UITableView *_wTable = _customRefreshTableView;
     [_customRefreshTableView setTableUpdatorStyle:CJUpdatorStyleRefresh];
-    [_customRefreshTableView setUpdateAnimationView:[[TSUpdateAnimationView alloc] init]];
+    TSUpdateAnimationView *_refreshView = [[TSUpdateAnimationView alloc] init];
+    [_refreshView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40.0)];
+    [_customRefreshTableView setUpdateAnimationView:_refreshView];
     [_customRefreshTableView setRefreshBlock:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if ( _wTable == nil ) {
@@ -94,6 +103,8 @@
     [_container addSubview:_customRefreshTableView];
     
     [_container setContentSize:CGSizeMake(self.view.bounds.size.width * 3, self.view.bounds.size.height)];
+    
+    [self _renderStyleTitle];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -159,6 +170,22 @@
                              (long)indexPath.section + 1, (long)indexPath.row + 1]];
     [cell.textLabel setBackgroundColor:[UIColor clearColor]];
     [cell.textLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ( scrollView == _container ) {
+        [self _renderStyleTitle];
+    }
+}
+
+- (void)_renderStyleTitle
+{
+    int _index = _container.contentOffset.x / _container.bounds.size.width;
+    if ( _index >= 0 && _index < _titles.count ) {
+        self.title = [NSString stringWithFormat:@"%@ ( %d of %ld )",
+                      [_titles objectAtIndex:_index], _index + 1, _titles.count];
+    }
 }
 
 @end
