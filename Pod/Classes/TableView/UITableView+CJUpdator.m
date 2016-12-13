@@ -156,8 +156,8 @@
 - (void)setRefreshStyle:(CJPullUpdatorViewStyle)refreshStyle
 {
     objc_setAssociatedObject(self, pRefreshStyle, @(refreshStyle), OBJC_ASSOCIATION_RETAIN);
-    CJPullRefreshView *_refreshView = [self _refreshContainer];
-    if ( [_refreshView isKindOfClass:[CJPullRefreshView class]] ) {
+    CJPullUpdatorView *_refreshView = (CJPullUpdatorView *)[self _refreshContainer];
+    if ( [_refreshView isKindOfClass:[CJPullUpdatorView class]] ) {
         [_refreshView setStyle:refreshStyle];
     }
 }
@@ -174,8 +174,8 @@
 - (void)setLoadmoreStyle:(CJPullUpdatorViewStyle)loadmoreStyle
 {
     objc_setAssociatedObject(self, pLoadmoreStyle, @(loadmoreStyle), OBJC_ASSOCIATION_RETAIN);
-    CJPullLoadmoreView *_loadmoreView = [self _loadmoreContainer];
-    if ( [_loadmoreView isKindOfClass:[CJPullRefreshView class]] ) {
+    CJPullUpdatorView *_loadmoreView = (CJPullUpdatorView *)[self _loadmoreContainer];
+    if ( [_loadmoreView isKindOfClass:[CJPullUpdatorView class]] ) {
         [_loadmoreView setStyle:loadmoreStyle];
     }
 }
@@ -213,7 +213,7 @@
 - (void)_createRefreshContainer
 {
     [self _createPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleRefresh];
-    CJPullUpdatorView *_updator = [self _refreshContainer];
+    CJPullUpdatorView *_updator = (CJPullUpdatorView *)[self _refreshContainer];
     if ( [_updator isKindOfClass:[CJPullUpdatorView class]] ) {
         [_updator setStyle:[self refreshStyle]];
     }
@@ -222,7 +222,7 @@
 - (void)_createLoadmoreContainer
 {
     [self _createPullUpdatorContainerForUpdatorStyle:CJUpdatorStyleLoadmore];
-    CJPullUpdatorView *_updator = [self _loadmoreContainer];
+    CJPullUpdatorView *_updator = (CJPullUpdatorView *)[self _loadmoreContainer];
     if ( [_updator isKindOfClass:[CJPullUpdatorView class]] ) {
         [_updator setStyle:[self loadmoreStyle]];
     }
