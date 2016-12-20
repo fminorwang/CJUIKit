@@ -122,8 +122,7 @@
 - (void)startUpdatingAnimation
 {
     _flags._isRefreshing = YES;
-    _percent = 1.0f;
-    
+    _percent = 1.0;
     [self setNeedsDisplay];
     
     [CATransaction begin];
