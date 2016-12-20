@@ -134,4 +134,23 @@
     return _results;
 }
 
++ (void)exchangeWithClass:(Class)aClass selector:(SEL)aSel andClass:(Class)bClass selector:(SEL)bSel
+{
+    Method _methodA = class_getInstanceMethod(aClass, aSel);
+    Method _methodB = class_getInstanceMethod(bClass, bSel);
+    
+    //交换实现
+    method_exchangeImplementations(_methodA, _methodB);
+}
+
++ (void)exchangeWithInstance:(NSObject *)aInstance selector:(SEL)aSel andInstance:(NSObject *)bInstance selector:(SEL)bSel
+{
+    Method _methodA = class_getInstanceMethod([aInstance class], aSel);
+    Method _methodB = class_getInstanceMethod([bInstance class], bSel);
+    if ( _methodB == NULL ) {
+        _methodB = class_getClassMethod(bInstance, bSel);
+    }
+    method_exchangeImplementations(_methodA, _methodB);
+}
+
 @end

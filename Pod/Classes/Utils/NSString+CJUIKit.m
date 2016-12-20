@@ -8,6 +8,7 @@
 
 #import "NSString+CJUIKit.h"
 #import "UIColor+CJUIKit.h"
+#import <CommonCrypto/CommonDigest.h>
 
 @implementation NSString (CJUIKit)
 
@@ -33,6 +34,21 @@
         [_params setObject:_keyAndValue[1] forKey:_keyAndValue[0]];
     }
     return _params;
+}
+
+@end
+
+@implementation NSString (Codec)
+
+- (NSString *)MD5String
+{
+    const char *cStr = [self UTF8String];
+    unsigned char digest[CC_MD5_DIGEST_LENGTH];
+    CC_MD5( cStr, strlen(cStr),digest );
+    NSMutableString *result = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+        [result appendFormat:@"%02x", digest[i]];
+    return result;
 }
 
 @end

@@ -33,6 +33,12 @@ typedef NS_ENUM(NSInteger, CJFormat) {
 
 @end
 
+@interface NSString (Codec)
+
+- (NSString *)MD5String;
+
+@end
+
 // 标记语言 CJML
 // 没有嵌套关系的简单 HTML
 @interface NSString (CJMarkedLanguage)

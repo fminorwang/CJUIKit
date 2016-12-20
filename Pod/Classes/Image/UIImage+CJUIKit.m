@@ -32,11 +32,14 @@
 + (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size cornerRadius:(CGFloat)cornerRadius
 {
     CGRect _rect = CGRectMake(0, 0, size.width, size.height);
+    
     UIGraphicsBeginImageContext(_rect.size);
     CGContextRef _context = UIGraphicsGetCurrentContext();
     
+    UIBezierPath *_path = [UIBezierPath bezierPathWithRoundedRect:_rect cornerRadius:cornerRadius];
     CGContextSetFillColorWithColor(_context, [color CGColor]);
-    CGContextFillRect(_context, _rect);
+    CGContextAddPath(_context, _path.CGPath);
+    CGContextFillPath(_context);
     
     UIImage *_image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
