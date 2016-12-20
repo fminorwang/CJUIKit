@@ -1,7 +1,7 @@
 ## Contents
 
-* UITableView+CJPullUpdator
-
+* [UITableView+CJPullUpdator](https://github.com/fminorwang/CJUIKit/wiki/UITableView-CJUIKit)
+  
   下拉刷新与加载更多
  
 * CJEmotionView
