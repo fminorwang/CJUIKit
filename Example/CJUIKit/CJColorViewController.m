@@ -91,7 +91,7 @@
     CGFloat _width = [UIScreen mainScreen].bounds.size.width - 2 * CJ_COLOR_CELL_MARGIN;
     CGFloat _height = CJ_COLOR_CELL_HEIGHT;
     
-    _colorArray = @[@"#ECB1AC", @"#ECB1ACFF",
+    _colorArray = @[@"#ECB1AC", @"#ECB1AC80",
                     @"#ECB1AC^0.5", @"#ECB1AC^.3",
                     [NSString stringWithFormat:@"w(%.01f) | #ECB1AC^0.0 : #ECB1AC^1.0", _width],
                     [NSString stringWithFormat:@"w(%.01f->0.0) | #ECB1AC^0.0 : #ECB1AC^1.0", _width],
