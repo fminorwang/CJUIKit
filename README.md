@@ -6,7 +6,7 @@
   
 * [UIColor+CJUIKit](https://github.com/fminorwang/CJUIKit/wiki/UIColor-CJUIKit)  
   
-  NSString 到 UIColor 的转换，以及从 NSString 到渐变色的快速生成
+  NSString 到 UIColor 的转换，以及渐变色的快速生成
  
 * CJEmotionView
 
