@@ -10,6 +10,7 @@
 
 #import "CJWebViewController.h"
 #import "CJTableViewController.h"
+#import "CJColorViewController.h"
 
 #import "CJUIKit-Prefix.pch"
 #import "CJMaskView.h"
@@ -38,7 +39,7 @@
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
     
-    _titles = @[@"UITableView+CJUpdator: 刷新与加载更多", @"CJWebView"];
+    _titles = @[@"UITableView+CJUpdator: 刷新与加载更多", @"CJWebView", @"Color"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -63,7 +64,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -112,6 +113,11 @@
             CJWebViewController *_vc = [[CJWebViewController alloc] init];
             [self.navigationController pushViewController:_vc animated:YES];
             break;
+        }
+            
+        case 2: {
+            CJColorViewController *_vc = [[CJColorViewController alloc] init];
+            [self.navigationController pushViewController:_vc animated:YES];
         }
             
         default:

@@ -10,6 +10,7 @@
 		2025E9551D476E88002E8698 /* CJMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2025E9541D476E88002E8698 /* CJMaskView.m */; };
 		203EADB41D4B121B004ED931 /* GraphicsServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 203EADB31D4B121B004ED931 /* GraphicsServices.framework */; };
 		206301481D17E67500D6A437 /* CJWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 206301471D17E67500D6A437 /* CJWebViewController.m */; };
+		20751ECE1E09400F00ABCC3F /* CJColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20751ECD1E09400F00ABCC3F /* CJColorViewController.m */; };
 		209888F31D42356600AA886D /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209888F21D42356600AA886D /* AdSupport.framework */; };
 		209888FF1D45FEA700AA886D /* CJURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 209888FE1D45FEA700AA886D /* CJURLProtocol.m */; };
 		209AA3F71DEF251700AF78C5 /* CJTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209AA3F61DEF251700AF78C5 /* CJTableViewController.m */; };
@@ -49,6 +50,8 @@
 		203EADB31D4B121B004ED931 /* GraphicsServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GraphicsServices.framework; sourceTree = "<group>"; };
 		206301461D17E67500D6A437 /* CJWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJWebViewController.h; sourceTree = "<group>"; };
 		206301471D17E67500D6A437 /* CJWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJWebViewController.m; sourceTree = "<group>"; };
+		20751ECC1E09400F00ABCC3F /* CJColorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJColorViewController.h; sourceTree = "<group>"; };
+		20751ECD1E09400F00ABCC3F /* CJColorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJColorViewController.m; sourceTree = "<group>"; };
 		209888F21D42356600AA886D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		209888FD1D45FEA700AA886D /* CJURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJURLProtocol.h; sourceTree = "<group>"; };
 		209888FE1D45FEA700AA886D /* CJURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJURLProtocol.m; sourceTree = "<group>"; };
@@ -116,6 +119,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20751ECB1E093FF200ABCC3F /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				20751ECC1E09400F00ABCC3F /* CJColorViewController.h */,
+				20751ECD1E09400F00ABCC3F /* CJColorViewController.m */,
+			);
+			name = Color;
+			sourceTree = "<group>";
+		};
 		209AA3F81DEF252400AF78C5 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +198,7 @@
 		6003F593195388D20070C39A /* Example for CJUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				20751ECB1E093FF200ABCC3F /* Color */,
 				209AA3F91DEF253500AF78C5 /* WebView */,
 				209AA3F81DEF252400AF78C5 /* TableView */,
 				6003F59C195388D20070C39A /* CJAppDelegate.h */,
@@ -398,6 +411,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20751ECE1E09400F00ABCC3F /* CJColorViewController.m in Sources */,
 				6003F59E195388D20070C39A /* CJAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* CJViewController.m in Sources */,
 				209888FF1D45FEA700AA886D /* CJURLProtocol.m in Sources */,
