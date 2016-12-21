@@ -3,6 +3,10 @@
 * [UITableView+CJPullUpdator](https://github.com/fminorwang/CJUIKit/wiki/UITableView-CJUIKit)  
   
   下拉刷新与加载更多
+  
+* UIColor+CJUIKit
+  
+  NSString 到 UIColor 的转换，以及从 NSString 到渐变色的快速生成
  
 * CJEmotionView
 
