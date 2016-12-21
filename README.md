@@ -4,8 +4,8 @@
   
   下拉刷新与加载更多
   
-* UIColor+CJUIKit
-  
+* [UIColor+CJUIKit](https://github.com/fminorwang/CJUIKit/wiki/UIColor-CJUIKit)
+  
   NSString 到 UIColor 的转换，以及从 NSString 到渐变色的快速生成
  
 * CJEmotionView
