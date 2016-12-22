@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "CJUIKit"
-  s.version          = "0.2.4"
+  s.version          = "0.3.0"
   s.summary          = "CJUIKit."
 
 # This description is used to generate tags and improve search results.
@@ -21,7 +21,8 @@ Pod::Spec.new do |s|
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "fminor" => "fminor.wang@gmail.com" }
-  s.source           = { :git => "https://github.com/fminorwang/CJUIKit.git", :branch => s.version, :tag => "0.2.4_0" }
+  # s.source           =  { :git => "/Users/wangshengli/Documents/mygit/CJUIKit", :tag => "0.3.0_2" }
+  s.source           = { :git => "https://github.com/fminorwang/CJUIKit.git", :branch => s.version, :tag => "0.3.0_2" }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '7.0'
