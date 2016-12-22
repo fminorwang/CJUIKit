@@ -93,8 +93,6 @@ void _parseGradientColorCombination(NSString *colorCombination,
     for ( NSString *_atomColorParam in _colors ) {
         CGFloat _tempColors[4] = {0.0};
         CGFloat _tempLocation = 0.0;
-        int _tempColorCount = 0;
-        int _tempLocationCount = 0;
         _parseGradientAtomColor(_atomColorParam, _tempColors, &_tempLocation);
         
         for ( int i = 0 ; i < 4 ; i++ ) {
@@ -106,6 +104,7 @@ void _parseGradientColorCombination(NSString *colorCombination,
     // 处理 location 缺省
     _fillOmittedLocation(locations, _locationCount);
     *locationCount = _locationCount;
+    *colorCount = _colorCount;
 }
 
 void _fillOmittedLocation(CGFloat *locations, int locationCount)
@@ -256,7 +255,7 @@ void _fillOmittedLocation(CGFloat *locations, int locationCount)
     *gradientColorType = CJGradientColorTypeNone;
     
     NSError *_error;
-    NSRegularExpression *_expression = [NSRegularExpression regularExpressionWithPattern:@"(h|w)\\((([0-9.]+)-\>)?([0-9.]+)\\)" options:0 error:&_error];
+    NSRegularExpression *_expression = [NSRegularExpression regularExpressionWithPattern:@"(h|w)\\((([0-9.]+)->)?([0-9.]+)\\)" options:0 error:&_error];
     if ( _error ) {
         return _result;
     }

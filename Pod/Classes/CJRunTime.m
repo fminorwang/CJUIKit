@@ -148,7 +148,8 @@
     Method _methodA = class_getInstanceMethod([aInstance class], aSel);
     Method _methodB = class_getInstanceMethod([bInstance class], bSel);
     if ( _methodB == NULL ) {
-        _methodB = class_getClassMethod(bInstance, bSel);
+        Class _class = bInstance;
+        _methodB = class_getClassMethod(_class, bSel);
     }
     method_exchangeImplementations(_methodA, _methodB);
 }
