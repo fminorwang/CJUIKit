@@ -85,8 +85,8 @@ void _parseGradientColorCombination(NSString *colorCombination,
                                     CGFloat *colors, CGFloat *locations, int *colorCount, int *locationCount)
 {
     NSArray *_colors = [colorCombination componentsSeparatedByString:kAtomColorSeparator];
-    int _colorCount = _colors.count * 4;
-    int _locationCount = _colors.count;
+    int _colorCount = (int)(_colors.count * 4);
+    int _locationCount = (int)(_colors.count);
     
     int _colorPtr = 0;
     int _locationPtr = 0;
