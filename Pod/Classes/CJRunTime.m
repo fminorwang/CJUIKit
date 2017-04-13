@@ -9,6 +9,27 @@
 #import "CJRunTime.h"
 #import <objc/runtime.h>
 
+void exchangeClassMethod(Class aCls, SEL aSel, Class bCls, SEL bSel)
+{
+    Method _methodA = class_getClassMethod(aCls, aSel);
+    Method _methodB = class_getClassMethod(bCls, bSel);
+    method_exchangeImplementations(_methodA, _methodB);
+}
+
+void exchangeInstanceMethod(Class aCls, SEL aSel, Class bCls, SEL bSel)
+{
+    Method _methodA = class_getInstanceMethod(aCls, aSel);
+    Method _methodB = class_getInstanceMethod(bCls, bSel);
+    method_exchangeImplementations(_methodA, _methodB);
+}
+
+void exchangeInstanceMethodObj(NSObject *aObj, SEL aSel, NSObject *bObj, SEL bSel)
+{
+    Method _methodA = class_getInstanceMethod([aObj class], aSel);
+    Method _methodB = class_getInstanceMethod([bObj class], bSel);
+    method_exchangeImplementations(_methodA, _methodB);
+}
+
 @implementation CJRunTime
 
 + (NSArray *)listMethodNameForClass:(Class)cls
@@ -21,6 +42,8 @@
     for ( int i = 0 ; i < _methodCount ; i++ ) {
         Method _method = _methodPtr[i];
         
+        struct objc_method_description *_desc = method_getDescription(_method);
+        
         SEL _methodName = method_getName(_method);
         NSString *_methodNameStr = NSStringFromSelector(_methodName);
         NSRange _range = [_methodNameStr rangeOfString:@":"];
@@ -31,8 +54,8 @@
         unsigned int _argNum = method_getNumberOfArguments(_method);
         NSMutableString *_argDesc = [[NSMutableString alloc] init];
         for ( int j = 2 ; j < _argNum ; j++ ) {
-            char _arg[100];
-            size_t _argLen = 100;
+            char _arg[512];
+            size_t _argLen = 512;
             method_getArgumentType(_method, j, _arg, _argLen);
             NSString *_argStr = [[NSString alloc] initWithCString:_arg encoding:NSUTF8StringEncoding];
             [_argDesc appendFormat:@":(%@) ", _argStr];
@@ -136,8 +159,8 @@
 
 + (void)exchangeWithClass:(Class)aClass selector:(SEL)aSel andClass:(Class)bClass selector:(SEL)bSel
 {
-    Method _methodA = class_getInstanceMethod(aClass, aSel);
-    Method _methodB = class_getInstanceMethod(bClass, bSel);
+    Method _methodA = class_getClassMethod(aClass, aSel);
+    Method _methodB = class_getClassMethod(bClass, bSel);
     
     //交换实现
     method_exchangeImplementations(_methodA, _methodB);
@@ -152,6 +175,12 @@
         _methodB = class_getClassMethod(_class, bSel);
     }
     method_exchangeImplementations(_methodA, _methodB);
+}
+
++ (void)printMethodsForClass:(Class)cls
+{
+    [self listMethodNameForClass:cls];
+    [self listClassMethodNameForClass:cls];
 }
 
 @end
